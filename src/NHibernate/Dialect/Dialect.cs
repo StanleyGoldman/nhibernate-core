@@ -1871,6 +1871,16 @@ namespace NHibernate.Dialect
 			get { return true; }
 		}
 
+        /// <summary> 
+        /// Does this dialect require that parameters appearing in the SELECT clause be wrapped in cast()
+        /// calls to tell the db parser the expected type.
+        /// </summary>
+        /// <returns> True if this is required; false otherwise. </returns>
+        public bool RequiresCastingOfParametersInSelectClause
+        {
+			get { return false; }
+        }
+
 		/// <summary> 
 		/// Does this dialect support asking the result set its positioning
 		/// information on forward only cursors.  Specifically, in the case of

@@ -42,14 +42,15 @@ namespace NHibernate.Hql.Ast.ANTLR.Tree
 			return GetChild(1);
 		}
 
-		public void SetScalarColumnText(int i)
+		public void SetScalarColumn(int i)
 		{
-			ISelectExpression[] selectExpressions = CollectSelectExpressions();
+            ScalarColumn = i;
+            ISelectExpression[] selectExpressions = CollectSelectExpressions();
 			// Invoke setScalarColumnText on each constructor argument.
 			for (int j = 0; j < selectExpressions.Length; j++)
 			{
 				ISelectExpression selectExpression = selectExpressions[j];
-				selectExpression.SetScalarColumnText(j);
+				selectExpression.SetScalarColumn(j);
 			}
 		}
 
@@ -79,7 +80,9 @@ namespace NHibernate.Hql.Ast.ANTLR.Tree
 			set { throw new InvalidOperationException("constructor may not be aliased"); }
 		}
 
-		public ConstructorInfo Constructor
+	    public int ScalarColumn { get; set; }
+
+	    public ConstructorInfo Constructor
 		{
 			get { return _constructor; }
 		}

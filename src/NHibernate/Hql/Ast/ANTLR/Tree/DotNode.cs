@@ -123,7 +123,7 @@ namespace NHibernate.Hql.Ast.ANTLR.Tree
 			set { _propertyPath = value; }
 		}
 
-		public override void SetScalarColumnText(int i)
+		public override void SetScalarColumn(int i)
 		{
 			string[] sqlColumns = GetColumns();
 			ColumnHelper.GenerateScalarColumns(Walker.ASTFactory, this, sqlColumns, i);

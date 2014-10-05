@@ -18,7 +18,7 @@ namespace NHibernate.Hql.Ast.ANTLR.Tree
 		{
 		}
 
-		public override void SetScalarColumnText(int i) 
+		public override void SetScalarColumn(int i) 
 		{
 			ColumnHelper.GenerateSingleScalarColumn(ASTFactory, this, i );
 		}

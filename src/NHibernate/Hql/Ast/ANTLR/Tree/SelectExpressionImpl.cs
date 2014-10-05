@@ -20,8 +20,9 @@ namespace NHibernate.Hql.Ast.ANTLR.Tree
 			throw new InvalidOperationException();
 		}
 
-		public override void SetScalarColumnText(int i)
+		public override void SetScalarColumn(int i)
 		{
+		    ScalarColumn = i;
 			Text = FromElement.RenderScalarIdentifierSelect(i);
 		}
 

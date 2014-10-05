@@ -72,8 +72,9 @@ namespace NHibernate.Hql.Ast.ANTLR.Tree
 
         #region ISelectExpression
 
-        public void SetScalarColumnText(int i)
+        public void SetScalarColumn(int i)
         {
+            ScalarColumn = i;
             ColumnHelper.GenerateSingleScalarColumn(ASTFactory, this, i);
         }
 
@@ -103,6 +104,8 @@ namespace NHibernate.Hql.Ast.ANTLR.Tree
             set { _alias = value; }
         }
 
-        #endregion
+	    public int ScalarColumn { get; set; }
+
+	    #endregion
 	}
 }

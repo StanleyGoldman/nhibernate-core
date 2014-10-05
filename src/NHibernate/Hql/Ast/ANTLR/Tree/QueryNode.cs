@@ -49,9 +49,10 @@ namespace NHibernate.Hql.Ast.ANTLR.Tree
 			}
 		}
 
-		public void SetScalarColumnText(int i)
+		public void SetScalarColumn(int i)
 		{
-			ColumnHelper.GenerateSingleScalarColumn(ASTFactory, this, i);
+            ScalarColumn = i;
+            ColumnHelper.GenerateSingleScalarColumn(ASTFactory, this, i);
 		}
 
 		public FromElement FromElement
@@ -80,7 +81,9 @@ namespace NHibernate.Hql.Ast.ANTLR.Tree
 			set;
 		}
 
-		public OrderByClause GetOrderByClause() 
+	    public int ScalarColumn { get; set; }
+
+	    public OrderByClause GetOrderByClause() 
 		{
 			if (_orderByClause == null) 
 			{
