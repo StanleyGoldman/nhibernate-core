@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.5.0.2 HqlSqlWalker.g 2014-10-05 10:19:15
+// $ANTLR 3.5.0.2 HqlSqlWalker.g 2014-10-08 21:47:27
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -2490,7 +2490,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			{
 				int LA20_2 = input.LA(2);
 
-				if ((( IsOrderExpressionResultVariableRef( _t ) )))
+                if (((IsOrderExpressionResultVariableRef(_t))))
 				{
 					alt20 = 1;
 				}
@@ -2525,11 +2525,11 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				root_0 = (IASTNode)adaptor.Nil();
 
 				DebugLocation(154, 4);
-				if (!(( IsOrderExpressionResultVariableRef( _t ) )))
+				if (!(( IsOrderExpressionResultVariableRef(orderExpr) )))
 				{
-					throw new FailedPredicateException(input, "orderExpr", " IsOrderExpressionResultVariableRef( _t ) ");
+					throw new FailedPredicateException(input, "orderExpr", " IsOrderExpressionResultVariableRef(orderExpr) ");
 				}
-				DebugLocation(154, 50);
+				DebugLocation(154, 55);
 
 				_last = (IASTNode)input.LT(1);
 				PushFollow(Follow._resultVariableRef_in_orderExpr749);
@@ -2624,8 +2624,8 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(159, 17);
 
 					// Create a RESULT_VARIABLE_REF node instead of an IDENT node.
-					var resultVariableRef = new ResultVariableRefNode([RESULT_VARIABLE_REF, i.Text)]);
-					HandleResultVariableRef(#resultVariableRef);
+					ResultVariableRefNode resultVariableRef = (IASTNode) adaptor.Create(RESULT_VARIABLE_REF, i.Text);
+					HandleResultVariableRef(resultVariableRef);
 				
 
 			}

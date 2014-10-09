@@ -151,15 +151,15 @@ orderExprs
 	;
 
 orderExpr
-	: { IsOrderExpressionResultVariableRef( _t ) }? resultVariableRef
+	: { IsOrderExpressionResultVariableRef(_t) }? resultVariableRef
 	| expr
 	;
 
 resultVariableRef!
 	: i=identifier {
 		// Create a RESULT_VARIABLE_REF node instead of an IDENT node.
-		var resultVariableRef = new ResultVariableRefNode([RESULT_VARIABLE_REF, i.Text)]);
-		HandleResultVariableRef(#resultVariableRef);
+		ResultVariableRefNode resultVariableRef = (IASTNode) adaptor.Create(RESULT_VARIABLE_REF, i.Text);
+		HandleResultVariableRef(resultVariableRef);
 	}
 	;
 
