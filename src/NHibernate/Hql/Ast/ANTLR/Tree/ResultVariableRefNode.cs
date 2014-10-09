@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Antlr.Runtime;
 using NHibernate.Engine;
 using NHibernate.Util;
+using NHibernate.SqlCommand;
+
 
 namespace NHibernate.Hql.Ast.ANTLR.Tree
 {
@@ -26,17 +26,15 @@ namespace NHibernate.Hql.Ast.ANTLR.Tree
             _selectExpression = selectExpression;
         }
 
-        public String GetRenderText(ISessionFactoryImplementor sessionFactory)
+        public override SqlString RenderText(ISessionFactoryImplementor sessionFactory)
         {
             int scalarColumnIndex = _selectExpression.ScalarColumn;
-            if (scalarColumnIndex < 0)
-            {
-                throw new QueryException("selectExpression.getScalarColumnIndex() must be >= 0; actual = " + scalarColumnIndex);
-            }
-            
-            return sessionFactory.Dialect.RequiresCastingOfParametersInSelectClause ?
+
+            string sql = sessionFactory.Dialect.RequiresCastingOfParametersInSelectClause ?
                 GetColumnPositionsString(scalarColumnIndex) :
                 GetColumnNamesString(scalarColumnIndex);
+
+            return new SqlString(sql);
 
         }
 
