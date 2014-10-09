@@ -40,6 +40,8 @@ namespace NHibernate.Hql.Ast.ANTLR
 		private readonly List<IParameterSpecification> _parameters = new List<IParameterSpecification>();
 		private FromClause _currentFromClause;
 		private SelectClause _selectClause;
+        private readonly Dictionary<String, ISelectExpression> _selectExpressionsByResultVariable = new Dictionary<String, ISelectExpression>();
+
 		private readonly AliasGenerator _aliasGenerator = new AliasGenerator();
 		private readonly ASTPrinter _printer = new ASTPrinter();
 
@@ -568,10 +570,42 @@ namespace NHibernate.Hql.Ast.ANTLR
 			}
 		}
 
-		static void SetAlias(IASTNode selectExpr, IASTNode ident)
-		{
-			((ISelectExpression)selectExpr).Alias = ident.Text;
-		}
+        void SetAlias(IASTNode selectExpr, IASTNode ident)
+        {
+            ((ISelectExpression)selectExpr).Alias = ident.Text;
+            // only put the alias (i.e., result variable) in selectExpressionsByResultVariable
+            // if is not defined in a subquery.
+            if (!IsSubQuery)
+            {
+                _selectExpressionsByResultVariable[ident.Text] = (ISelectExpression)selectExpr;
+            }
+        }
+
+
+        protected bool IsOrderExpressionResultVariableRef(IASTNode orderExpressionNode)
+        {
+            // ORDER BY is not supported in a subquery
+            // TODO: should an exception be thrown if an ORDER BY is in a subquery?
+            if (!IsSubQuery &&
+            orderExpressionNode.Type == IDENT &&
+            _selectExpressionsByResultVariable.ContainsKey(orderExpressionNode.Text))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        protected void HandleResultVariableRef(IASTNode resultVariableRef)
+        {
+            if (IsSubQuery)
+            {
+                throw new SemanticException(
+                "References to result variables in subqueries are not supported."
+                );
+            }
+
+            ((ResultVariableRefNode)resultVariableRef).SetSelectExpression(_selectExpressionsByResultVariable[resultVariableRef.Text]);
+        }
 
 		static void ResolveSelectExpression(IASTNode node)
 		{
