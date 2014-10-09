@@ -151,16 +151,16 @@ orderExprs
 	;
 
 orderExpr
-	: { IsOrderExpressionResultVariableRef(_t) }? resultVariableRef
+	: { IsOrderExpressionResultVariableRef( (IASTNode) input.LT(1) ) }? resultVariableRef // not sure that _t is input.LT(1) but seems to be working.
 	| expr
 	;
 
 resultVariableRef!
-	: i=identifier {
-		// Create a RESULT_VARIABLE_REF node instead of an IDENT node.
-		ResultVariableRefNode resultVariableRef = (IASTNode) adaptor.Create(RESULT_VARIABLE_REF, i.Text);
-		HandleResultVariableRef(resultVariableRef);
+	@after {
+		HandleResultVariableRef( $resultVariableRef.tree );
 	}
+	: i=identifier
+	-> ^(RESULT_VARIABLE_REF [i.Tree.Text])  // $i.text does not work because tokenstream is empty.
 	;
 
 skipClause

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.5.0.2 HqlSqlWalker.g 2014-10-08 21:47:27
+// $ANTLR 3.5.0.2 HqlSqlWalker.g 2014-10-09 11:31:30
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -2490,7 +2490,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			{
 				int LA20_2 = input.LA(2);
 
-                if (((IsOrderExpressionResultVariableRef(_t))))
+				if ((( IsOrderExpressionResultVariableRef( (IASTNode) input.LT(1) ) )))
 				{
 					alt20 = 1;
 				}
@@ -2525,11 +2525,11 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				root_0 = (IASTNode)adaptor.Nil();
 
 				DebugLocation(154, 4);
-				if (!(( IsOrderExpressionResultVariableRef(orderExpr) )))
+				if (!(( IsOrderExpressionResultVariableRef( (IASTNode) input.LT(1) ) )))
 				{
-					throw new FailedPredicateException(input, "orderExpr", " IsOrderExpressionResultVariableRef(orderExpr) ");
+					throw new FailedPredicateException(input, "orderExpr", " IsOrderExpressionResultVariableRef( (IASTNode) input.LT(1) ) ");
 				}
-				DebugLocation(154, 55);
+				DebugLocation(154, 70);
 
 				_last = (IASTNode)input.LT(1);
 				PushFollow(Follow._resultVariableRef_in_orderExpr749);
@@ -2550,7 +2550,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(155, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._expr_in_orderExpr754);
+				PushFollow(Follow._expr_in_orderExpr755);
 				expr35=expr();
 				PopFollow();
 
@@ -2585,7 +2585,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 	partial void EnterRule_resultVariableRef();
 	partial void LeaveRule_resultVariableRef();
 	// $ANTLR start "resultVariableRef"
-	// HqlSqlWalker.g:158:1: resultVariableRef : i= identifier ;
+	// HqlSqlWalker.g:158:1: resultVariableRef : i= identifier -> ^( RESULT_VARIABLE_REF[i.Tree.Text] ) ;
 	[GrammarRule("resultVariableRef")]
 	private AstTreeRuleReturnScope<IASTNode, IASTNode> resultVariableRef()
 	{
@@ -2602,36 +2602,60 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 
 		AstTreeRuleReturnScope<IASTNode, IASTNode> i = default(AstTreeRuleReturnScope<IASTNode, IASTNode>);
 
+		RewriteRuleSubtreeStream stream_identifier=new RewriteRuleSubtreeStream(adaptor,"rule identifier");
 		try { DebugEnterRule(GrammarFileName, "resultVariableRef");
 		DebugLocation(158, 1);
 		try
 		{
-			// HqlSqlWalker.g:159:2: (i= identifier )
+			// HqlSqlWalker.g:162:2: (i= identifier -> ^( RESULT_VARIABLE_REF[i.Tree.Text] ) )
 			DebugEnterAlt(1);
-			// HqlSqlWalker.g:159:4: i= identifier
+			// HqlSqlWalker.g:162:4: i= identifier
 			{
-			root_0 = (IASTNode)adaptor.Nil();
-
-			DebugLocation(159, 5);
-
+			DebugLocation(162, 5);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._identifier_in_resultVariableRef768);
+			PushFollow(Follow._identifier_in_resultVariableRef775);
 			i=identifier();
 			PopFollow();
 
-			adaptor.AddChild(root_0, i.Tree);
+			stream_identifier.Add(i.Tree);
 
-			DebugLocation(159, 17);
 
-					// Create a RESULT_VARIABLE_REF node instead of an IDENT node.
-					ResultVariableRefNode resultVariableRef = (IASTNode) adaptor.Create(RESULT_VARIABLE_REF, i.Text);
-					HandleResultVariableRef(resultVariableRef);
-				
+			{
+			// AST REWRITE
+			// elements: 
+			// token labels: 
+			// rule labels: retval
+			// token list labels: 
+			// rule list labels: 
+			// wildcard labels: 
+			retval.Tree = root_0;
+			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
+
+			root_0 = (IASTNode)adaptor.Nil();
+			// 163:2: -> ^( RESULT_VARIABLE_REF[i.Tree.Text] )
+			{
+				DebugLocation(163, 5);
+				// HqlSqlWalker.g:163:5: ^( RESULT_VARIABLE_REF[i.Tree.Text] )
+				{
+				IASTNode root_1 = (IASTNode)adaptor.Nil();
+				DebugLocation(163, 7);
+				root_1 = (IASTNode)adaptor.BecomeRoot((IASTNode)adaptor.Create(RESULT_VARIABLE_REF, i.Tree.Text), root_1);
+
+				adaptor.AddChild(root_0, root_1);
+				}
+
+			}
+
+			retval.Tree = root_0;
+			}
 
 			}
 
 			retval.Tree = (IASTNode)adaptor.RulePostProcessing(root_0);
 
+
+					HandleResultVariableRef( retval.Tree );
+				
 		}
 		catch (RecognitionException re)
 		{
@@ -2695,7 +2719,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(167, 6);
 
 			_last = (IASTNode)input.LT(1);
-			SKIP36=(IASTNode)Match(input,SKIP,Follow._SKIP_in_skipClause782); 
+			SKIP36=(IASTNode)Match(input,SKIP,Follow._SKIP_in_skipClause798); 
 			SKIP36_tree = (IASTNode)adaptor.DupNode(SKIP36);
 
 
@@ -2734,7 +2758,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(167, 12);
 
 				_last = (IASTNode)input.LT(1);
-				NUM_INT37=(IASTNode)Match(input,NUM_INT,Follow._NUM_INT_in_skipClause785); 
+				NUM_INT37=(IASTNode)Match(input,NUM_INT,Follow._NUM_INT_in_skipClause801); 
 				NUM_INT37_tree = (IASTNode)adaptor.DupNode(NUM_INT37);
 
 
@@ -2750,7 +2774,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(167, 22);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._parameter_in_skipClause789);
+				PushFollow(Follow._parameter_in_skipClause805);
 				parameter38=parameter();
 				PopFollow();
 
@@ -2837,7 +2861,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(171, 6);
 
 			_last = (IASTNode)input.LT(1);
-			TAKE39=(IASTNode)Match(input,TAKE,Follow._TAKE_in_takeClause803); 
+			TAKE39=(IASTNode)Match(input,TAKE,Follow._TAKE_in_takeClause819); 
 			TAKE39_tree = (IASTNode)adaptor.DupNode(TAKE39);
 
 
@@ -2876,7 +2900,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(171, 12);
 
 				_last = (IASTNode)input.LT(1);
-				NUM_INT40=(IASTNode)Match(input,NUM_INT,Follow._NUM_INT_in_takeClause806); 
+				NUM_INT40=(IASTNode)Match(input,NUM_INT,Follow._NUM_INT_in_takeClause822); 
 				NUM_INT40_tree = (IASTNode)adaptor.DupNode(NUM_INT40);
 
 
@@ -2892,7 +2916,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(171, 22);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._parameter_in_takeClause810);
+				PushFollow(Follow._parameter_in_takeClause826);
 				parameter41=parameter();
 				PopFollow();
 
@@ -2977,7 +3001,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(175, 6);
 
 			_last = (IASTNode)input.LT(1);
-			GROUP42=(IASTNode)Match(input,GROUP,Follow._GROUP_in_groupClause824); 
+			GROUP42=(IASTNode)Match(input,GROUP,Follow._GROUP_in_groupClause840); 
 			GROUP42_tree = (IASTNode)adaptor.DupNode(GROUP42);
 
 
@@ -3014,7 +3038,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(175, 45);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._expr_in_groupClause829);
+					PushFollow(Follow._expr_in_groupClause845);
 					expr43=expr();
 					PopFollow();
 
@@ -3111,7 +3135,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(179, 6);
 
 			_last = (IASTNode)input.LT(1);
-			HAVING44=(IASTNode)Match(input,HAVING,Follow._HAVING_in_havingClause845); 
+			HAVING44=(IASTNode)Match(input,HAVING,Follow._HAVING_in_havingClause861); 
 			HAVING44_tree = (IASTNode)adaptor.DupNode(HAVING44);
 
 
@@ -3122,7 +3146,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(179, 13);
 
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._logicalExpr_in_havingClause847);
+			PushFollow(Follow._logicalExpr_in_havingClause863);
 			logicalExpr45=logicalExpr();
 			PopFollow();
 
@@ -3203,7 +3227,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(183, 6);
 
 			_last = (IASTNode)input.LT(1);
-			SELECT46=(IASTNode)Match(input,SELECT,Follow._SELECT_in_selectClause861); 
+			SELECT46=(IASTNode)Match(input,SELECT,Follow._SELECT_in_selectClause877); 
 			 
 			stream_SELECT.Add(SELECT46);
 
@@ -3233,7 +3257,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(183, 70);
 
 				_last = (IASTNode)input.LT(1);
-				d=(IASTNode)Match(input,DISTINCT,Follow._DISTINCT_in_selectClause868); 
+				d=(IASTNode)Match(input,DISTINCT,Follow._DISTINCT_in_selectClause884); 
 				 
 				stream_DISTINCT.Add(d);
 
@@ -3246,7 +3270,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 
 			DebugLocation(183, 83);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._selectExprList_in_selectClause874);
+			PushFollow(Follow._selectExprList_in_selectClause890);
 			x=selectExprList();
 			PopFollow();
 
@@ -3390,7 +3414,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(191, 6);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._selectExpr_in_selectExprList909);
+					PushFollow(Follow._selectExpr_in_selectExprList925);
 					selectExpr47=selectExpr();
 					PopFollow();
 
@@ -3406,7 +3430,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(191, 19);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._aliasedSelectExpr_in_selectExprList913);
+					PushFollow(Follow._aliasedSelectExpr_in_selectExprList929);
 					aliasedSelectExpr48=aliasedSelectExpr();
 					PopFollow();
 
@@ -3502,7 +3526,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(201, 6);
 
 			_last = (IASTNode)input.LT(1);
-			AS49=(IASTNode)Match(input,AS,Follow._AS_in_aliasedSelectExpr937); 
+			AS49=(IASTNode)Match(input,AS,Follow._AS_in_aliasedSelectExpr953); 
 			AS49_tree = (IASTNode)adaptor.DupNode(AS49);
 
 
@@ -3513,7 +3537,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(201, 11);
 
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._selectExpr_in_aliasedSelectExpr941);
+			PushFollow(Follow._selectExpr_in_aliasedSelectExpr957);
 			se=selectExpr();
 			PopFollow();
 
@@ -3522,7 +3546,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(201, 24);
 
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._identifier_in_aliasedSelectExpr945);
+			PushFollow(Follow._identifier_in_aliasedSelectExpr961);
 			i=identifier();
 			PopFollow();
 
@@ -3701,7 +3725,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(205, 5);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._propertyRef_in_selectExpr960);
+				PushFollow(Follow._propertyRef_in_selectExpr976);
 				p=propertyRef();
 				PopFollow();
 
@@ -3728,7 +3752,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(206, 6);
 
 				_last = (IASTNode)input.LT(1);
-				ALL50=(IASTNode)Match(input,ALL,Follow._ALL_in_selectExpr972); 
+				ALL50=(IASTNode)Match(input,ALL,Follow._ALL_in_selectExpr988); 
 				ALL50_tree = (IASTNode)adaptor.DupNode(ALL50);
 
 
@@ -3739,7 +3763,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(206, 13);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._aliasRef_in_selectExpr976);
+				PushFollow(Follow._aliasRef_in_selectExpr992);
 				ar2=aliasRef();
 				PopFollow();
 
@@ -3772,7 +3796,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(207, 6);
 
 				_last = (IASTNode)input.LT(1);
-				OBJECT51=(IASTNode)Match(input,OBJECT,Follow._OBJECT_in_selectExpr988); 
+				OBJECT51=(IASTNode)Match(input,OBJECT,Follow._OBJECT_in_selectExpr1004); 
 				OBJECT51_tree = (IASTNode)adaptor.DupNode(OBJECT51);
 
 
@@ -3783,7 +3807,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(207, 16);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._aliasRef_in_selectExpr992);
+				PushFollow(Follow._aliasRef_in_selectExpr1008);
 				ar3=aliasRef();
 				PopFollow();
 
@@ -3809,7 +3833,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(208, 7);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._constructor_in_selectExpr1003);
+				PushFollow(Follow._constructor_in_selectExpr1019);
 				con=constructor();
 				PopFollow();
 
@@ -3829,7 +3853,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(209, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._functionCall_in_selectExpr1014);
+				PushFollow(Follow._functionCall_in_selectExpr1030);
 				functionCall52=functionCall();
 				PopFollow();
 
@@ -3847,7 +3871,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(210, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._parameter_in_selectExpr1019);
+				PushFollow(Follow._parameter_in_selectExpr1035);
 				parameter53=parameter();
 				PopFollow();
 
@@ -3865,7 +3889,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(211, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._count_in_selectExpr1024);
+				PushFollow(Follow._count_in_selectExpr1040);
 				count54=count();
 				PopFollow();
 
@@ -3883,7 +3907,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(212, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._collectionFunction_in_selectExpr1029);
+				PushFollow(Follow._collectionFunction_in_selectExpr1045);
 				collectionFunction55=collectionFunction();
 				PopFollow();
 
@@ -3901,7 +3925,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(213, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._literal_in_selectExpr1037);
+				PushFollow(Follow._literal_in_selectExpr1053);
 				literal56=literal();
 				PopFollow();
 
@@ -3919,7 +3943,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(214, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._arithmeticExpr_in_selectExpr1042);
+				PushFollow(Follow._arithmeticExpr_in_selectExpr1058);
 				arithmeticExpr57=arithmeticExpr();
 				PopFollow();
 
@@ -3937,7 +3961,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(215, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._query_in_selectExpr1047);
+				PushFollow(Follow._query_in_selectExpr1063);
 				query58=query();
 				PopFollow();
 
@@ -4015,7 +4039,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(219, 6);
 
 			_last = (IASTNode)input.LT(1);
-			COUNT59=(IASTNode)Match(input,COUNT,Follow._COUNT_in_count1059); 
+			COUNT59=(IASTNode)Match(input,COUNT,Follow._COUNT_in_count1075); 
 			COUNT59_tree = (IASTNode)adaptor.DupNode(COUNT59);
 
 
@@ -4101,7 +4125,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(219, 34);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._aggregateExpr_in_count1074);
+				PushFollow(Follow._aggregateExpr_in_count1090);
 				aggregateExpr61=aggregateExpr();
 				PopFollow();
 
@@ -4117,7 +4141,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(219, 50);
 
 				_last = (IASTNode)input.LT(1);
-				ROW_STAR62=(IASTNode)Match(input,ROW_STAR,Follow._ROW_STAR_in_count1078); 
+				ROW_STAR62=(IASTNode)Match(input,ROW_STAR,Follow._ROW_STAR_in_count1094); 
 				ROW_STAR62_tree = (IASTNode)adaptor.DupNode(ROW_STAR62);
 
 
@@ -4204,7 +4228,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(223, 6);
 
 			_last = (IASTNode)input.LT(1);
-			CONSTRUCTOR63=(IASTNode)Match(input,CONSTRUCTOR,Follow._CONSTRUCTOR_in_constructor1094); 
+			CONSTRUCTOR63=(IASTNode)Match(input,CONSTRUCTOR,Follow._CONSTRUCTOR_in_constructor1110); 
 			CONSTRUCTOR63_tree = (IASTNode)adaptor.DupNode(CONSTRUCTOR63);
 
 
@@ -4215,7 +4239,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(223, 18);
 
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._path_in_constructor1096);
+			PushFollow(Follow._path_in_constructor1112);
 			path64=path();
 			PopFollow();
 
@@ -4250,7 +4274,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(223, 25);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._selectExpr_in_constructor1100);
+					PushFollow(Follow._selectExpr_in_constructor1116);
 					selectExpr65=selectExpr();
 					PopFollow();
 
@@ -4266,7 +4290,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(223, 38);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._aliasedSelectExpr_in_constructor1104);
+					PushFollow(Follow._aliasedSelectExpr_in_constructor1120);
 					aliasedSelectExpr66=aliasedSelectExpr();
 					PopFollow();
 
@@ -4372,7 +4396,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(227, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._expr_in_aggregateExpr1120);
+				PushFollow(Follow._expr_in_aggregateExpr1136);
 				expr67=expr();
 				PopFollow();
 
@@ -4390,7 +4414,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(228, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._collectionFunction_in_aggregateExpr1126);
+				PushFollow(Follow._collectionFunction_in_aggregateExpr1142);
 				collectionFunction68=collectionFunction();
 				PopFollow();
 
@@ -4469,7 +4493,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(238, 7);
 
 			_last = (IASTNode)input.LT(1);
-			f=(IASTNode)Match(input,FROM,Follow._FROM_in_fromClause1146); 
+			f=(IASTNode)Match(input,FROM,Follow._FROM_in_fromClause1162); 
 			f_tree = (IASTNode)adaptor.DupNode(f);
 
 
@@ -4483,7 +4507,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(238, 69);
 
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._fromElementList_in_fromClause1150);
+			PushFollow(Follow._fromElementList_in_fromClause1166);
 			fromElementList69=fromElementList();
 			PopFollow();
 
@@ -4579,7 +4603,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(245, 5);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._fromElement_in_fromElementList1168);
+					PushFollow(Follow._fromElement_in_fromElementList1184);
 					fromElement70=fromElement();
 					PopFollow();
 
@@ -4721,7 +4745,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(255, 6);
 
 				_last = (IASTNode)input.LT(1);
-				RANGE71=(IASTNode)Match(input,RANGE,Follow._RANGE_in_fromElement1193); 
+				RANGE71=(IASTNode)Match(input,RANGE,Follow._RANGE_in_fromElement1209); 
 				 
 				stream_RANGE.Add(RANGE71);
 
@@ -4729,7 +4753,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				Match(input, TokenTypes.Down, null); 
 				DebugLocation(255, 13);
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._path_in_fromElement1197);
+				PushFollow(Follow._path_in_fromElement1213);
 				p=path();
 				PopFollow();
 
@@ -4755,7 +4779,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(255, 21);
 
 					_last = (IASTNode)input.LT(1);
-					a=(IASTNode)Match(input,ALIAS,Follow._ALIAS_in_fromElement1202); 
+					a=(IASTNode)Match(input,ALIAS,Follow._ALIAS_in_fromElement1218); 
 					 
 					stream_ALIAS.Add(a);
 
@@ -4787,7 +4811,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(255, 33);
 
 					_last = (IASTNode)input.LT(1);
-					pf=(IASTNode)Match(input,FETCH,Follow._FETCH_in_fromElement1209); 
+					pf=(IASTNode)Match(input,FETCH,Follow._FETCH_in_fromElement1225); 
 					 
 					stream_FETCH.Add(pf);
 
@@ -4851,7 +4875,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				{
 				DebugLocation(258, 6);
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._joinElement_in_fromElement1236);
+				PushFollow(Follow._joinElement_in_fromElement1252);
 				je=joinElement();
 				PopFollow();
 
@@ -4888,14 +4912,14 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(261, 6);
 
 				_last = (IASTNode)input.LT(1);
-				fe=(IASTNode)Match(input,FILTER_ENTITY,Follow._FILTER_ENTITY_in_fromElement1251); 
+				fe=(IASTNode)Match(input,FILTER_ENTITY,Follow._FILTER_ENTITY_in_fromElement1267); 
 				 
 				stream_FILTER_ENTITY.Add(fe);
 
 				DebugLocation(261, 23);
 
 				_last = (IASTNode)input.LT(1);
-				a3=(IASTNode)Match(input,ALIAS,Follow._ALIAS_in_fromElement1255); 
+				a3=(IASTNode)Match(input,ALIAS,Follow._ALIAS_in_fromElement1271); 
 				 
 				stream_ALIAS.Add(a3);
 
@@ -5008,7 +5032,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(269, 6);
 
 			_last = (IASTNode)input.LT(1);
-			JOIN72=(IASTNode)Match(input,JOIN,Follow._JOIN_in_joinElement1284); 
+			JOIN72=(IASTNode)Match(input,JOIN,Follow._JOIN_in_joinElement1300); 
 			JOIN72_tree = (IASTNode)adaptor.DupNode(JOIN72);
 
 
@@ -5037,7 +5061,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(269, 13);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._joinType_in_joinElement1289);
+				PushFollow(Follow._joinType_in_joinElement1305);
 				j=joinType();
 				PopFollow();
 
@@ -5073,7 +5097,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(269, 58);
 
 				_last = (IASTNode)input.LT(1);
-				f=(IASTNode)Match(input,FETCH,Follow._FETCH_in_joinElement1299); 
+				f=(IASTNode)Match(input,FETCH,Follow._FETCH_in_joinElement1315); 
 				f_tree = (IASTNode)adaptor.DupNode(f);
 
 
@@ -5089,7 +5113,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(269, 71);
 
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._propertyRef_in_joinElement1305);
+			PushFollow(Follow._propertyRef_in_joinElement1321);
 			pRef=propertyRef();
 			PopFollow();
 
@@ -5116,7 +5140,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(269, 86);
 
 				_last = (IASTNode)input.LT(1);
-				a=(IASTNode)Match(input,ALIAS,Follow._ALIAS_in_joinElement1310); 
+				a=(IASTNode)Match(input,ALIAS,Follow._ALIAS_in_joinElement1326); 
 				a_tree = (IASTNode)adaptor.DupNode(a);
 
 
@@ -5150,7 +5174,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(269, 98);
 
 				_last = (IASTNode)input.LT(1);
-				pf=(IASTNode)Match(input,FETCH,Follow._FETCH_in_joinElement1317); 
+				pf=(IASTNode)Match(input,FETCH,Follow._FETCH_in_joinElement1333); 
 				pf_tree = (IASTNode)adaptor.DupNode(pf);
 
 
@@ -5196,7 +5220,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(269, 115);
 
 				_last = (IASTNode)input.LT(1);
-				with=(IASTNode)Match(input,WITH,Follow._WITH_in_joinElement1326); 
+				with=(IASTNode)Match(input,WITH,Follow._WITH_in_joinElement1342); 
 				with_tree = (IASTNode)adaptor.DupNode(with);
 
 
@@ -5423,7 +5447,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(282, 11);
 
 					_last = (IASTNode)input.LT(1);
-					left=(IASTNode)Match(input,LEFT,Follow._LEFT_in_joinType1367); 
+					left=(IASTNode)Match(input,LEFT,Follow._LEFT_in_joinType1383); 
 					left_tree = (IASTNode)adaptor.DupNode(left);
 
 
@@ -5439,7 +5463,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(282, 24);
 
 					_last = (IASTNode)input.LT(1);
-					right=(IASTNode)Match(input,RIGHT,Follow._RIGHT_in_joinType1373); 
+					right=(IASTNode)Match(input,RIGHT,Follow._RIGHT_in_joinType1389); 
 					right_tree = (IASTNode)adaptor.DupNode(right);
 
 
@@ -5473,7 +5497,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(282, 38);
 
 					_last = (IASTNode)input.LT(1);
-					outer=(IASTNode)Match(input,OUTER,Follow._OUTER_in_joinType1379); 
+					outer=(IASTNode)Match(input,OUTER,Follow._OUTER_in_joinType1395); 
 					outer_tree = (IASTNode)adaptor.DupNode(outer);
 
 
@@ -5507,7 +5531,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(288, 4);
 
 				_last = (IASTNode)input.LT(1);
-				FULL74=(IASTNode)Match(input,FULL,Follow._FULL_in_joinType1393); 
+				FULL74=(IASTNode)Match(input,FULL,Follow._FULL_in_joinType1409); 
 				FULL74_tree = (IASTNode)adaptor.DupNode(FULL74);
 
 
@@ -5529,7 +5553,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(291, 4);
 
 				_last = (IASTNode)input.LT(1);
-				INNER75=(IASTNode)Match(input,INNER,Follow._INNER_in_joinType1400); 
+				INNER75=(IASTNode)Match(input,INNER,Follow._INNER_in_joinType1416); 
 				INNER75_tree = (IASTNode)adaptor.DupNode(INNER75);
 
 
@@ -5631,7 +5655,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(299, 5);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._identifier_in_path1422);
+				PushFollow(Follow._identifier_in_path1438);
 				a=identifier();
 				PopFollow();
 
@@ -5658,7 +5682,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(300, 6);
 
 				_last = (IASTNode)input.LT(1);
-				DOT76=(IASTNode)Match(input,DOT,Follow._DOT_in_path1430); 
+				DOT76=(IASTNode)Match(input,DOT,Follow._DOT_in_path1446); 
 				DOT76_tree = (IASTNode)adaptor.DupNode(DOT76);
 
 
@@ -5669,7 +5693,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(300, 11);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._path_in_path1434);
+				PushFollow(Follow._path_in_path1450);
 				x=path();
 				PopFollow();
 
@@ -5678,7 +5702,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(300, 18);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._identifier_in_path1438);
+				PushFollow(Follow._identifier_in_path1454);
 				y=identifier();
 				PopFollow();
 
@@ -5753,7 +5777,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			{
 			DebugLocation(309, 7);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._path_in_pathAsIdent1457);
+			PushFollow(Follow._path_in_pathAsIdent1473);
 			path77=path();
 			PopFollow();
 
@@ -5854,7 +5878,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(320, 7);
 
 			_last = (IASTNode)input.LT(1);
-			w=(IASTNode)Match(input,WITH,Follow._WITH_in_withClause1498); 
+			w=(IASTNode)Match(input,WITH,Follow._WITH_in_withClause1514); 
 			 
 			stream_WITH.Add(w);
 
@@ -5865,7 +5889,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			Match(input, TokenTypes.Down, null); 
 			DebugLocation(320, 45);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._logicalExpr_in_withClause1504);
+			PushFollow(Follow._logicalExpr_in_withClause1520);
 			b=logicalExpr();
 			PopFollow();
 
@@ -5977,7 +6001,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(325, 7);
 
 			_last = (IASTNode)input.LT(1);
-			w=(IASTNode)Match(input,WHERE,Follow._WHERE_in_whereClause1532); 
+			w=(IASTNode)Match(input,WHERE,Follow._WHERE_in_whereClause1548); 
 			 
 			stream_WHERE.Add(w);
 
@@ -5988,7 +6012,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			Match(input, TokenTypes.Down, null); 
 			DebugLocation(325, 47);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._logicalExpr_in_whereClause1538);
+			PushFollow(Follow._logicalExpr_in_whereClause1554);
 			b=logicalExpr();
 			PopFollow();
 
@@ -6175,7 +6199,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(330, 6);
 
 				_last = (IASTNode)input.LT(1);
-				AND78=(IASTNode)Match(input,AND,Follow._AND_in_logicalExpr1564); 
+				AND78=(IASTNode)Match(input,AND,Follow._AND_in_logicalExpr1580); 
 				AND78_tree = (IASTNode)adaptor.DupNode(AND78);
 
 
@@ -6186,7 +6210,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(330, 10);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._logicalExpr_in_logicalExpr1566);
+				PushFollow(Follow._logicalExpr_in_logicalExpr1582);
 				logicalExpr79=logicalExpr();
 				PopFollow();
 
@@ -6195,7 +6219,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(330, 22);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._logicalExpr_in_logicalExpr1568);
+				PushFollow(Follow._logicalExpr_in_logicalExpr1584);
 				logicalExpr80=logicalExpr();
 				PopFollow();
 
@@ -6226,7 +6250,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(331, 6);
 
 				_last = (IASTNode)input.LT(1);
-				OR81=(IASTNode)Match(input,OR,Follow._OR_in_logicalExpr1575); 
+				OR81=(IASTNode)Match(input,OR,Follow._OR_in_logicalExpr1591); 
 				OR81_tree = (IASTNode)adaptor.DupNode(OR81);
 
 
@@ -6237,7 +6261,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(331, 9);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._logicalExpr_in_logicalExpr1577);
+				PushFollow(Follow._logicalExpr_in_logicalExpr1593);
 				logicalExpr82=logicalExpr();
 				PopFollow();
 
@@ -6246,7 +6270,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(331, 21);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._logicalExpr_in_logicalExpr1579);
+				PushFollow(Follow._logicalExpr_in_logicalExpr1595);
 				logicalExpr83=logicalExpr();
 				PopFollow();
 
@@ -6277,7 +6301,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(332, 6);
 
 				_last = (IASTNode)input.LT(1);
-				NOT84=(IASTNode)Match(input,NOT,Follow._NOT_in_logicalExpr1586); 
+				NOT84=(IASTNode)Match(input,NOT,Follow._NOT_in_logicalExpr1602); 
 				NOT84_tree = (IASTNode)adaptor.DupNode(NOT84);
 
 
@@ -6288,7 +6312,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(332, 10);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._logicalExpr_in_logicalExpr1588);
+				PushFollow(Follow._logicalExpr_in_logicalExpr1604);
 				logicalExpr85=logicalExpr();
 				PopFollow();
 
@@ -6312,7 +6336,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(333, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._comparisonExpr_in_logicalExpr1594);
+				PushFollow(Follow._comparisonExpr_in_logicalExpr1610);
 				comparisonExpr86=comparisonExpr();
 				PopFollow();
 
@@ -6330,7 +6354,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(334, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._functionCall_in_logicalExpr1599);
+				PushFollow(Follow._functionCall_in_logicalExpr1615);
 				functionCall87=functionCall();
 				PopFollow();
 
@@ -6348,7 +6372,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(335, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._logicalPath_in_logicalExpr1604);
+				PushFollow(Follow._logicalPath_in_logicalExpr1620);
 				logicalPath88=logicalPath();
 				PopFollow();
 
@@ -6411,7 +6435,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			{
 			DebugLocation(342, 5);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._addrExpr_in_logicalPath1623);
+			PushFollow(Follow._addrExpr_in_logicalPath1639);
 			p=addrExpr(true);
 			PopFollow();
 
@@ -6683,7 +6707,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(351, 6);
 
 				_last = (IASTNode)input.LT(1);
-				EQ89=(IASTNode)Match(input,EQ,Follow._EQ_in_comparisonExpr1661); 
+				EQ89=(IASTNode)Match(input,EQ,Follow._EQ_in_comparisonExpr1677); 
 				EQ89_tree = (IASTNode)adaptor.DupNode(EQ89);
 
 
@@ -6694,7 +6718,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(351, 9);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1663);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1679);
 				exprOrSubquery90=exprOrSubquery();
 				PopFollow();
 
@@ -6703,7 +6727,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(351, 24);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1665);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1681);
 				exprOrSubquery91=exprOrSubquery();
 				PopFollow();
 
@@ -6732,7 +6756,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(352, 6);
 
 				_last = (IASTNode)input.LT(1);
-				NE92=(IASTNode)Match(input,NE,Follow._NE_in_comparisonExpr1672); 
+				NE92=(IASTNode)Match(input,NE,Follow._NE_in_comparisonExpr1688); 
 				NE92_tree = (IASTNode)adaptor.DupNode(NE92);
 
 
@@ -6743,7 +6767,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(352, 9);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1674);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1690);
 				exprOrSubquery93=exprOrSubquery();
 				PopFollow();
 
@@ -6752,7 +6776,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(352, 24);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1676);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1692);
 				exprOrSubquery94=exprOrSubquery();
 				PopFollow();
 
@@ -6781,7 +6805,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(353, 6);
 
 				_last = (IASTNode)input.LT(1);
-				LT95=(IASTNode)Match(input,LT,Follow._LT_in_comparisonExpr1683); 
+				LT95=(IASTNode)Match(input,LT,Follow._LT_in_comparisonExpr1699); 
 				LT95_tree = (IASTNode)adaptor.DupNode(LT95);
 
 
@@ -6792,7 +6816,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(353, 9);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1685);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1701);
 				exprOrSubquery96=exprOrSubquery();
 				PopFollow();
 
@@ -6801,7 +6825,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(353, 24);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1687);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1703);
 				exprOrSubquery97=exprOrSubquery();
 				PopFollow();
 
@@ -6830,7 +6854,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(354, 6);
 
 				_last = (IASTNode)input.LT(1);
-				GT98=(IASTNode)Match(input,GT,Follow._GT_in_comparisonExpr1694); 
+				GT98=(IASTNode)Match(input,GT,Follow._GT_in_comparisonExpr1710); 
 				GT98_tree = (IASTNode)adaptor.DupNode(GT98);
 
 
@@ -6841,7 +6865,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(354, 9);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1696);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1712);
 				exprOrSubquery99=exprOrSubquery();
 				PopFollow();
 
@@ -6850,7 +6874,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(354, 24);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1698);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1714);
 				exprOrSubquery100=exprOrSubquery();
 				PopFollow();
 
@@ -6879,7 +6903,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(355, 6);
 
 				_last = (IASTNode)input.LT(1);
-				LE101=(IASTNode)Match(input,LE,Follow._LE_in_comparisonExpr1705); 
+				LE101=(IASTNode)Match(input,LE,Follow._LE_in_comparisonExpr1721); 
 				LE101_tree = (IASTNode)adaptor.DupNode(LE101);
 
 
@@ -6890,7 +6914,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(355, 9);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1707);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1723);
 				exprOrSubquery102=exprOrSubquery();
 				PopFollow();
 
@@ -6899,7 +6923,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(355, 24);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1709);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1725);
 				exprOrSubquery103=exprOrSubquery();
 				PopFollow();
 
@@ -6928,7 +6952,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(356, 6);
 
 				_last = (IASTNode)input.LT(1);
-				GE104=(IASTNode)Match(input,GE,Follow._GE_in_comparisonExpr1716); 
+				GE104=(IASTNode)Match(input,GE,Follow._GE_in_comparisonExpr1732); 
 				GE104_tree = (IASTNode)adaptor.DupNode(GE104);
 
 
@@ -6939,7 +6963,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(356, 9);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1718);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1734);
 				exprOrSubquery105=exprOrSubquery();
 				PopFollow();
 
@@ -6948,7 +6972,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(356, 24);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1720);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1736);
 				exprOrSubquery106=exprOrSubquery();
 				PopFollow();
 
@@ -6977,7 +7001,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(357, 6);
 
 				_last = (IASTNode)input.LT(1);
-				LIKE107=(IASTNode)Match(input,LIKE,Follow._LIKE_in_comparisonExpr1727); 
+				LIKE107=(IASTNode)Match(input,LIKE,Follow._LIKE_in_comparisonExpr1743); 
 				LIKE107_tree = (IASTNode)adaptor.DupNode(LIKE107);
 
 
@@ -6988,7 +7012,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(357, 11);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1729);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1745);
 				exprOrSubquery108=exprOrSubquery();
 				PopFollow();
 
@@ -6997,7 +7021,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(357, 26);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._expr_in_comparisonExpr1731);
+				PushFollow(Follow._expr_in_comparisonExpr1747);
 				expr109=expr();
 				PopFollow();
 
@@ -7031,7 +7055,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(357, 35);
 
 					_last = (IASTNode)input.LT(1);
-					ESCAPE110=(IASTNode)Match(input,ESCAPE,Follow._ESCAPE_in_comparisonExpr1736); 
+					ESCAPE110=(IASTNode)Match(input,ESCAPE,Follow._ESCAPE_in_comparisonExpr1752); 
 					ESCAPE110_tree = (IASTNode)adaptor.DupNode(ESCAPE110);
 
 
@@ -7042,7 +7066,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(357, 42);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._expr_in_comparisonExpr1738);
+					PushFollow(Follow._expr_in_comparisonExpr1754);
 					expr111=expr();
 					PopFollow();
 
@@ -7084,7 +7108,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(358, 6);
 
 				_last = (IASTNode)input.LT(1);
-				NOT_LIKE112=(IASTNode)Match(input,NOT_LIKE,Follow._NOT_LIKE_in_comparisonExpr1750); 
+				NOT_LIKE112=(IASTNode)Match(input,NOT_LIKE,Follow._NOT_LIKE_in_comparisonExpr1766); 
 				NOT_LIKE112_tree = (IASTNode)adaptor.DupNode(NOT_LIKE112);
 
 
@@ -7095,7 +7119,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(358, 15);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1752);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1768);
 				exprOrSubquery113=exprOrSubquery();
 				PopFollow();
 
@@ -7104,7 +7128,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(358, 30);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._expr_in_comparisonExpr1754);
+				PushFollow(Follow._expr_in_comparisonExpr1770);
 				expr114=expr();
 				PopFollow();
 
@@ -7138,7 +7162,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(358, 39);
 
 					_last = (IASTNode)input.LT(1);
-					ESCAPE115=(IASTNode)Match(input,ESCAPE,Follow._ESCAPE_in_comparisonExpr1759); 
+					ESCAPE115=(IASTNode)Match(input,ESCAPE,Follow._ESCAPE_in_comparisonExpr1775); 
 					ESCAPE115_tree = (IASTNode)adaptor.DupNode(ESCAPE115);
 
 
@@ -7149,7 +7173,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(358, 46);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._expr_in_comparisonExpr1761);
+					PushFollow(Follow._expr_in_comparisonExpr1777);
 					expr116=expr();
 					PopFollow();
 
@@ -7191,7 +7215,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(359, 6);
 
 				_last = (IASTNode)input.LT(1);
-				BETWEEN117=(IASTNode)Match(input,BETWEEN,Follow._BETWEEN_in_comparisonExpr1773); 
+				BETWEEN117=(IASTNode)Match(input,BETWEEN,Follow._BETWEEN_in_comparisonExpr1789); 
 				BETWEEN117_tree = (IASTNode)adaptor.DupNode(BETWEEN117);
 
 
@@ -7202,7 +7226,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(359, 14);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1775);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1791);
 				exprOrSubquery118=exprOrSubquery();
 				PopFollow();
 
@@ -7211,7 +7235,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(359, 29);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1777);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1793);
 				exprOrSubquery119=exprOrSubquery();
 				PopFollow();
 
@@ -7220,7 +7244,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(359, 44);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1779);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1795);
 				exprOrSubquery120=exprOrSubquery();
 				PopFollow();
 
@@ -7249,7 +7273,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(360, 6);
 
 				_last = (IASTNode)input.LT(1);
-				NOT_BETWEEN121=(IASTNode)Match(input,NOT_BETWEEN,Follow._NOT_BETWEEN_in_comparisonExpr1786); 
+				NOT_BETWEEN121=(IASTNode)Match(input,NOT_BETWEEN,Follow._NOT_BETWEEN_in_comparisonExpr1802); 
 				NOT_BETWEEN121_tree = (IASTNode)adaptor.DupNode(NOT_BETWEEN121);
 
 
@@ -7260,7 +7284,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(360, 18);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1788);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1804);
 				exprOrSubquery122=exprOrSubquery();
 				PopFollow();
 
@@ -7269,7 +7293,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(360, 33);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1790);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1806);
 				exprOrSubquery123=exprOrSubquery();
 				PopFollow();
 
@@ -7278,7 +7302,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(360, 48);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1792);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1808);
 				exprOrSubquery124=exprOrSubquery();
 				PopFollow();
 
@@ -7307,7 +7331,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(361, 6);
 
 				_last = (IASTNode)input.LT(1);
-				IN125=(IASTNode)Match(input,IN,Follow._IN_in_comparisonExpr1799); 
+				IN125=(IASTNode)Match(input,IN,Follow._IN_in_comparisonExpr1815); 
 				IN125_tree = (IASTNode)adaptor.DupNode(IN125);
 
 
@@ -7318,7 +7342,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(361, 9);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1801);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1817);
 				exprOrSubquery126=exprOrSubquery();
 				PopFollow();
 
@@ -7327,7 +7351,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(361, 24);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._inRhs_in_comparisonExpr1803);
+				PushFollow(Follow._inRhs_in_comparisonExpr1819);
 				inRhs127=inRhs();
 				PopFollow();
 
@@ -7356,7 +7380,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(362, 6);
 
 				_last = (IASTNode)input.LT(1);
-				NOT_IN128=(IASTNode)Match(input,NOT_IN,Follow._NOT_IN_in_comparisonExpr1811); 
+				NOT_IN128=(IASTNode)Match(input,NOT_IN,Follow._NOT_IN_in_comparisonExpr1827); 
 				NOT_IN128_tree = (IASTNode)adaptor.DupNode(NOT_IN128);
 
 
@@ -7367,7 +7391,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(362, 13);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1813);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1829);
 				exprOrSubquery129=exprOrSubquery();
 				PopFollow();
 
@@ -7376,7 +7400,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(362, 28);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._inRhs_in_comparisonExpr1815);
+				PushFollow(Follow._inRhs_in_comparisonExpr1831);
 				inRhs130=inRhs();
 				PopFollow();
 
@@ -7405,7 +7429,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(363, 6);
 
 				_last = (IASTNode)input.LT(1);
-				IS_NULL131=(IASTNode)Match(input,IS_NULL,Follow._IS_NULL_in_comparisonExpr1823); 
+				IS_NULL131=(IASTNode)Match(input,IS_NULL,Follow._IS_NULL_in_comparisonExpr1839); 
 				IS_NULL131_tree = (IASTNode)adaptor.DupNode(IS_NULL131);
 
 
@@ -7416,7 +7440,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(363, 14);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1825);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1841);
 				exprOrSubquery132=exprOrSubquery();
 				PopFollow();
 
@@ -7445,7 +7469,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(364, 6);
 
 				_last = (IASTNode)input.LT(1);
-				IS_NOT_NULL133=(IASTNode)Match(input,IS_NOT_NULL,Follow._IS_NOT_NULL_in_comparisonExpr1832); 
+				IS_NOT_NULL133=(IASTNode)Match(input,IS_NOT_NULL,Follow._IS_NOT_NULL_in_comparisonExpr1848); 
 				IS_NOT_NULL133_tree = (IASTNode)adaptor.DupNode(IS_NOT_NULL133);
 
 
@@ -7456,7 +7480,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(364, 18);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1834);
+				PushFollow(Follow._exprOrSubquery_in_comparisonExpr1850);
 				exprOrSubquery134=exprOrSubquery();
 				PopFollow();
 
@@ -7485,7 +7509,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(367, 6);
 
 				_last = (IASTNode)input.LT(1);
-				EXISTS135=(IASTNode)Match(input,EXISTS,Follow._EXISTS_in_comparisonExpr1843); 
+				EXISTS135=(IASTNode)Match(input,EXISTS,Follow._EXISTS_in_comparisonExpr1859); 
 				EXISTS135_tree = (IASTNode)adaptor.DupNode(EXISTS135);
 
 
@@ -7524,7 +7548,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(367, 15);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._expr_in_comparisonExpr1847);
+					PushFollow(Follow._expr_in_comparisonExpr1863);
 					expr136=expr();
 					PopFollow();
 
@@ -7540,7 +7564,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(367, 22);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._collectionFunctionOrSubselect_in_comparisonExpr1851);
+					PushFollow(Follow._collectionFunctionOrSubselect_in_comparisonExpr1867);
 					collectionFunctionOrSubselect137=collectionFunctionOrSubselect();
 					PopFollow();
 
@@ -7638,7 +7662,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(373, 6);
 
 			_last = (IASTNode)input.LT(1);
-			IN_LIST138=(IASTNode)Match(input,IN_LIST,Follow._IN_LIST_in_inRhs1875); 
+			IN_LIST138=(IASTNode)Match(input,IN_LIST,Follow._IN_LIST_in_inRhs1891); 
 			IN_LIST138_tree = (IASTNode)adaptor.DupNode(IN_LIST138);
 
 
@@ -7678,7 +7702,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(373, 16);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._collectionFunctionOrSubselect_in_inRhs1879);
+					PushFollow(Follow._collectionFunctionOrSubselect_in_inRhs1895);
 					collectionFunctionOrSubselect139=collectionFunctionOrSubselect();
 					PopFollow();
 
@@ -7716,7 +7740,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 							DebugLocation(373, 48);
 
 							_last = (IASTNode)input.LT(1);
-							PushFollow(Follow._expr_in_inRhs1883);
+							PushFollow(Follow._expr_in_inRhs1899);
 							expr140=expr();
 							PopFollow();
 
@@ -7889,7 +7913,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(377, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._expr_in_exprOrSubquery1899);
+				PushFollow(Follow._expr_in_exprOrSubquery1915);
 				expr141=expr();
 				PopFollow();
 
@@ -7907,7 +7931,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(378, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._query_in_exprOrSubquery1904);
+				PushFollow(Follow._query_in_exprOrSubquery1920);
 				query142=query();
 				PopFollow();
 
@@ -7932,7 +7956,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(379, 6);
 
 				_last = (IASTNode)input.LT(1);
-				ANY143=(IASTNode)Match(input,ANY,Follow._ANY_in_exprOrSubquery1910); 
+				ANY143=(IASTNode)Match(input,ANY,Follow._ANY_in_exprOrSubquery1926); 
 				ANY143_tree = (IASTNode)adaptor.DupNode(ANY143);
 
 
@@ -7943,7 +7967,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(379, 10);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._collectionFunctionOrSubselect_in_exprOrSubquery1912);
+				PushFollow(Follow._collectionFunctionOrSubselect_in_exprOrSubquery1928);
 				collectionFunctionOrSubselect144=collectionFunctionOrSubselect();
 				PopFollow();
 
@@ -7974,7 +7998,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(380, 6);
 
 				_last = (IASTNode)input.LT(1);
-				ALL145=(IASTNode)Match(input,ALL,Follow._ALL_in_exprOrSubquery1919); 
+				ALL145=(IASTNode)Match(input,ALL,Follow._ALL_in_exprOrSubquery1935); 
 				ALL145_tree = (IASTNode)adaptor.DupNode(ALL145);
 
 
@@ -7985,7 +8009,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(380, 10);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._collectionFunctionOrSubselect_in_exprOrSubquery1921);
+				PushFollow(Follow._collectionFunctionOrSubselect_in_exprOrSubquery1937);
 				collectionFunctionOrSubselect146=collectionFunctionOrSubselect();
 				PopFollow();
 
@@ -8016,7 +8040,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(381, 6);
 
 				_last = (IASTNode)input.LT(1);
-				SOME147=(IASTNode)Match(input,SOME,Follow._SOME_in_exprOrSubquery1928); 
+				SOME147=(IASTNode)Match(input,SOME,Follow._SOME_in_exprOrSubquery1944); 
 				SOME147_tree = (IASTNode)adaptor.DupNode(SOME147);
 
 
@@ -8027,7 +8051,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(381, 11);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._collectionFunctionOrSubselect_in_exprOrSubquery1930);
+				PushFollow(Follow._collectionFunctionOrSubselect_in_exprOrSubquery1946);
 				collectionFunctionOrSubselect148=collectionFunctionOrSubselect();
 				PopFollow();
 
@@ -8121,7 +8145,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(385, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._collectionFunction_in_collectionFunctionOrSubselect1943);
+				PushFollow(Follow._collectionFunction_in_collectionFunctionOrSubselect1959);
 				collectionFunction149=collectionFunction();
 				PopFollow();
 
@@ -8139,7 +8163,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(386, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._query_in_collectionFunctionOrSubselect1948);
+				PushFollow(Follow._query_in_collectionFunctionOrSubselect1964);
 				query150=query();
 				PopFollow();
 
@@ -8287,7 +8311,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(390, 6);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._addrExpr_in_expr1962);
+				PushFollow(Follow._addrExpr_in_expr1978);
 				ae=addrExpr(true);
 				PopFollow();
 
@@ -8314,7 +8338,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(391, 7);
 
 				_last = (IASTNode)input.LT(1);
-				VECTOR_EXPR151=(IASTNode)Match(input,VECTOR_EXPR,Follow._VECTOR_EXPR_in_expr1974); 
+				VECTOR_EXPR151=(IASTNode)Match(input,VECTOR_EXPR,Follow._VECTOR_EXPR_in_expr1990); 
 				VECTOR_EXPR151_tree = (IASTNode)adaptor.DupNode(VECTOR_EXPR151);
 
 
@@ -8348,7 +8372,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 							DebugLocation(391, 20);
 
 							_last = (IASTNode)input.LT(1);
-							PushFollow(Follow._expr_in_expr1977);
+							PushFollow(Follow._expr_in_expr1993);
 							expr152=expr();
 							PopFollow();
 
@@ -8387,7 +8411,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(392, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._constant_in_expr1986);
+				PushFollow(Follow._constant_in_expr2002);
 				constant153=constant();
 				PopFollow();
 
@@ -8405,7 +8429,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(393, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._arithmeticExpr_in_expr1991);
+				PushFollow(Follow._arithmeticExpr_in_expr2007);
 				arithmeticExpr154=arithmeticExpr();
 				PopFollow();
 
@@ -8423,7 +8447,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(394, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._functionCall_in_expr1996);
+				PushFollow(Follow._functionCall_in_expr2012);
 				functionCall155=functionCall();
 				PopFollow();
 
@@ -8441,7 +8465,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(395, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._parameter_in_expr2008);
+				PushFollow(Follow._parameter_in_expr2024);
 				parameter156=parameter();
 				PopFollow();
 
@@ -8459,7 +8483,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(396, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._count_in_expr2013);
+				PushFollow(Follow._count_in_expr2029);
 				count157=count();
 				PopFollow();
 
@@ -8632,7 +8656,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(406, 6);
 
 				_last = (IASTNode)input.LT(1);
-				PLUS158=(IASTNode)Match(input,PLUS,Follow._PLUS_in_arithmeticExpr2041); 
+				PLUS158=(IASTNode)Match(input,PLUS,Follow._PLUS_in_arithmeticExpr2057); 
 				PLUS158_tree = (IASTNode)adaptor.DupNode(PLUS158);
 
 
@@ -8643,7 +8667,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(406, 11);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2043);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2059);
 				exprOrSubquery159=exprOrSubquery();
 				PopFollow();
 
@@ -8652,7 +8676,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(406, 26);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2045);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2061);
 				exprOrSubquery160=exprOrSubquery();
 				PopFollow();
 
@@ -8683,7 +8707,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(407, 6);
 
 				_last = (IASTNode)input.LT(1);
-				MINUS161=(IASTNode)Match(input,MINUS,Follow._MINUS_in_arithmeticExpr2052); 
+				MINUS161=(IASTNode)Match(input,MINUS,Follow._MINUS_in_arithmeticExpr2068); 
 				MINUS161_tree = (IASTNode)adaptor.DupNode(MINUS161);
 
 
@@ -8694,7 +8718,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(407, 12);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2054);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2070);
 				exprOrSubquery162=exprOrSubquery();
 				PopFollow();
 
@@ -8703,7 +8727,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(407, 27);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2056);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2072);
 				exprOrSubquery163=exprOrSubquery();
 				PopFollow();
 
@@ -8734,7 +8758,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(408, 6);
 
 				_last = (IASTNode)input.LT(1);
-				DIV164=(IASTNode)Match(input,DIV,Follow._DIV_in_arithmeticExpr2063); 
+				DIV164=(IASTNode)Match(input,DIV,Follow._DIV_in_arithmeticExpr2079); 
 				DIV164_tree = (IASTNode)adaptor.DupNode(DIV164);
 
 
@@ -8745,7 +8769,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(408, 10);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2065);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2081);
 				exprOrSubquery165=exprOrSubquery();
 				PopFollow();
 
@@ -8754,7 +8778,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(408, 25);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2067);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2083);
 				exprOrSubquery166=exprOrSubquery();
 				PopFollow();
 
@@ -8785,7 +8809,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(409, 6);
 
 				_last = (IASTNode)input.LT(1);
-				STAR167=(IASTNode)Match(input,STAR,Follow._STAR_in_arithmeticExpr2074); 
+				STAR167=(IASTNode)Match(input,STAR,Follow._STAR_in_arithmeticExpr2090); 
 				STAR167_tree = (IASTNode)adaptor.DupNode(STAR167);
 
 
@@ -8796,7 +8820,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(409, 11);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2076);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2092);
 				exprOrSubquery168=exprOrSubquery();
 				PopFollow();
 
@@ -8805,7 +8829,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(409, 26);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2078);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2094);
 				exprOrSubquery169=exprOrSubquery();
 				PopFollow();
 
@@ -8836,7 +8860,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(410, 6);
 
 				_last = (IASTNode)input.LT(1);
-				BNOT170=(IASTNode)Match(input,BNOT,Follow._BNOT_in_arithmeticExpr2085); 
+				BNOT170=(IASTNode)Match(input,BNOT,Follow._BNOT_in_arithmeticExpr2101); 
 				BNOT170_tree = (IASTNode)adaptor.DupNode(BNOT170);
 
 
@@ -8847,7 +8871,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(410, 11);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2087);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2103);
 				exprOrSubquery171=exprOrSubquery();
 				PopFollow();
 
@@ -8878,7 +8902,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(411, 6);
 
 				_last = (IASTNode)input.LT(1);
-				BAND172=(IASTNode)Match(input,BAND,Follow._BAND_in_arithmeticExpr2094); 
+				BAND172=(IASTNode)Match(input,BAND,Follow._BAND_in_arithmeticExpr2110); 
 				BAND172_tree = (IASTNode)adaptor.DupNode(BAND172);
 
 
@@ -8889,7 +8913,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(411, 11);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2096);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2112);
 				exprOrSubquery173=exprOrSubquery();
 				PopFollow();
 
@@ -8898,7 +8922,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(411, 26);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2098);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2114);
 				exprOrSubquery174=exprOrSubquery();
 				PopFollow();
 
@@ -8929,7 +8953,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(412, 6);
 
 				_last = (IASTNode)input.LT(1);
-				BOR175=(IASTNode)Match(input,BOR,Follow._BOR_in_arithmeticExpr2105); 
+				BOR175=(IASTNode)Match(input,BOR,Follow._BOR_in_arithmeticExpr2121); 
 				BOR175_tree = (IASTNode)adaptor.DupNode(BOR175);
 
 
@@ -8940,7 +8964,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(412, 10);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2107);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2123);
 				exprOrSubquery176=exprOrSubquery();
 				PopFollow();
 
@@ -8949,7 +8973,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(412, 25);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2109);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2125);
 				exprOrSubquery177=exprOrSubquery();
 				PopFollow();
 
@@ -8980,7 +9004,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(413, 6);
 
 				_last = (IASTNode)input.LT(1);
-				BXOR178=(IASTNode)Match(input,BXOR,Follow._BXOR_in_arithmeticExpr2116); 
+				BXOR178=(IASTNode)Match(input,BXOR,Follow._BXOR_in_arithmeticExpr2132); 
 				BXOR178_tree = (IASTNode)adaptor.DupNode(BXOR178);
 
 
@@ -8991,7 +9015,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(413, 11);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2118);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2134);
 				exprOrSubquery179=exprOrSubquery();
 				PopFollow();
 
@@ -9000,7 +9024,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(413, 26);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2120);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2136);
 				exprOrSubquery180=exprOrSubquery();
 				PopFollow();
 
@@ -9031,7 +9055,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(415, 6);
 
 				_last = (IASTNode)input.LT(1);
-				UNARY_MINUS181=(IASTNode)Match(input,UNARY_MINUS,Follow._UNARY_MINUS_in_arithmeticExpr2128); 
+				UNARY_MINUS181=(IASTNode)Match(input,UNARY_MINUS,Follow._UNARY_MINUS_in_arithmeticExpr2144); 
 				UNARY_MINUS181_tree = (IASTNode)adaptor.DupNode(UNARY_MINUS181);
 
 
@@ -9042,7 +9066,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(415, 18);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2130);
+				PushFollow(Follow._exprOrSubquery_in_arithmeticExpr2146);
 				exprOrSubquery182=exprOrSubquery();
 				PopFollow();
 
@@ -9066,7 +9090,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(416, 5);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._caseExpr_in_arithmeticExpr2138);
+				PushFollow(Follow._caseExpr_in_arithmeticExpr2154);
 				c=caseExpr();
 				PopFollow();
 
@@ -9184,7 +9208,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(420, 6);
 
 				_last = (IASTNode)input.LT(1);
-				CASE183=(IASTNode)Match(input,CASE,Follow._CASE_in_caseExpr2150); 
+				CASE183=(IASTNode)Match(input,CASE,Follow._CASE_in_caseExpr2166); 
 				CASE183_tree = (IASTNode)adaptor.DupNode(CASE183);
 
 
@@ -9228,7 +9252,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 						DebugLocation(420, 34);
 
 						_last = (IASTNode)input.LT(1);
-						WHEN184=(IASTNode)Match(input,WHEN,Follow._WHEN_in_caseExpr2156); 
+						WHEN184=(IASTNode)Match(input,WHEN,Follow._WHEN_in_caseExpr2172); 
 						WHEN184_tree = (IASTNode)adaptor.DupNode(WHEN184);
 
 
@@ -9239,7 +9263,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 						DebugLocation(420, 39);
 
 						_last = (IASTNode)input.LT(1);
-						PushFollow(Follow._logicalExpr_in_caseExpr2158);
+						PushFollow(Follow._logicalExpr_in_caseExpr2174);
 						logicalExpr185=logicalExpr();
 						PopFollow();
 
@@ -9248,7 +9272,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 						DebugLocation(420, 51);
 
 						_last = (IASTNode)input.LT(1);
-						PushFollow(Follow._expr_in_caseExpr2160);
+						PushFollow(Follow._expr_in_caseExpr2176);
 						expr186=expr();
 						PopFollow();
 
@@ -9307,7 +9331,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(420, 62);
 
 					_last = (IASTNode)input.LT(1);
-					ELSE187=(IASTNode)Match(input,ELSE,Follow._ELSE_in_caseExpr2167); 
+					ELSE187=(IASTNode)Match(input,ELSE,Follow._ELSE_in_caseExpr2183); 
 					ELSE187_tree = (IASTNode)adaptor.DupNode(ELSE187);
 
 
@@ -9318,7 +9342,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(420, 67);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._expr_in_caseExpr2169);
+					PushFollow(Follow._expr_in_caseExpr2185);
 					expr188=expr();
 					PopFollow();
 
@@ -9364,7 +9388,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(421, 6);
 
 				_last = (IASTNode)input.LT(1);
-				CASE2189=(IASTNode)Match(input,CASE2,Follow._CASE2_in_caseExpr2181); 
+				CASE2189=(IASTNode)Match(input,CASE2,Follow._CASE2_in_caseExpr2197); 
 				CASE2189_tree = (IASTNode)adaptor.DupNode(CASE2189);
 
 
@@ -9378,7 +9402,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(421, 32);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._expr_in_caseExpr2185);
+				PushFollow(Follow._expr_in_caseExpr2201);
 				expr190=expr();
 				PopFollow();
 
@@ -9417,7 +9441,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 						DebugLocation(421, 40);
 
 						_last = (IASTNode)input.LT(1);
-						WHEN191=(IASTNode)Match(input,WHEN,Follow._WHEN_in_caseExpr2189); 
+						WHEN191=(IASTNode)Match(input,WHEN,Follow._WHEN_in_caseExpr2205); 
 						WHEN191_tree = (IASTNode)adaptor.DupNode(WHEN191);
 
 
@@ -9428,7 +9452,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 						DebugLocation(421, 45);
 
 						_last = (IASTNode)input.LT(1);
-						PushFollow(Follow._expr_in_caseExpr2191);
+						PushFollow(Follow._expr_in_caseExpr2207);
 						expr192=expr();
 						PopFollow();
 
@@ -9437,7 +9461,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 						DebugLocation(421, 50);
 
 						_last = (IASTNode)input.LT(1);
-						PushFollow(Follow._expr_in_caseExpr2193);
+						PushFollow(Follow._expr_in_caseExpr2209);
 						expr193=expr();
 						PopFollow();
 
@@ -9496,7 +9520,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(421, 61);
 
 					_last = (IASTNode)input.LT(1);
-					ELSE194=(IASTNode)Match(input,ELSE,Follow._ELSE_in_caseExpr2200); 
+					ELSE194=(IASTNode)Match(input,ELSE,Follow._ELSE_in_caseExpr2216); 
 					ELSE194_tree = (IASTNode)adaptor.DupNode(ELSE194);
 
 
@@ -9507,7 +9531,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(421, 66);
 
 					_last = (IASTNode)input.LT(1);
-					PushFollow(Follow._expr_in_caseExpr2202);
+					PushFollow(Follow._expr_in_caseExpr2218);
 					expr195=expr();
 					PopFollow();
 
@@ -9627,7 +9651,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(427, 7);
 
 				_last = (IASTNode)input.LT(1);
-				e=(IASTNode)Match(input,ELEMENTS,Follow._ELEMENTS_in_collectionFunction2224); 
+				e=(IASTNode)Match(input,ELEMENTS,Follow._ELEMENTS_in_collectionFunction2240); 
 				e_tree = (IASTNode)adaptor.DupNode(e);
 
 
@@ -9641,7 +9665,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(427, 43);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._propertyRef_in_collectionFunction2230);
+				PushFollow(Follow._propertyRef_in_collectionFunction2246);
 				p1=propertyRef();
 				PopFollow();
 
@@ -9678,7 +9702,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(429, 7);
 
 				_last = (IASTNode)input.LT(1);
-				i=(IASTNode)Match(input,INDICES,Follow._INDICES_in_collectionFunction2249); 
+				i=(IASTNode)Match(input,INDICES,Follow._INDICES_in_collectionFunction2265); 
 				i_tree = (IASTNode)adaptor.DupNode(i);
 
 
@@ -9692,7 +9716,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(429, 42);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._propertyRef_in_collectionFunction2255);
+				PushFollow(Follow._propertyRef_in_collectionFunction2271);
 				p2=propertyRef();
 				PopFollow();
 
@@ -9808,7 +9832,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(434, 7);
 
 				_last = (IASTNode)input.LT(1);
-				m=(IASTNode)Match(input,METHOD_CALL,Follow._METHOD_CALL_in_functionCall2280); 
+				m=(IASTNode)Match(input,METHOD_CALL,Follow._METHOD_CALL_in_functionCall2296); 
 				m_tree = (IASTNode)adaptor.DupNode(m);
 
 
@@ -9822,7 +9846,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(434, 45);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._pathAsIdent_in_functionCall2285);
+				PushFollow(Follow._pathAsIdent_in_functionCall2301);
 				pathAsIdent196=pathAsIdent();
 				PopFollow();
 
@@ -9856,7 +9880,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 					DebugLocation(434, 61);
 
 					_last = (IASTNode)input.LT(1);
-					EXPR_LIST197=(IASTNode)Match(input,EXPR_LIST,Follow._EXPR_LIST_in_functionCall2290); 
+					EXPR_LIST197=(IASTNode)Match(input,EXPR_LIST,Follow._EXPR_LIST_in_functionCall2306); 
 					EXPR_LIST197_tree = (IASTNode)adaptor.DupNode(EXPR_LIST197);
 
 
@@ -9946,7 +9970,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 								DebugLocation(434, 72);
 
 								_last = (IASTNode)input.LT(1);
-								PushFollow(Follow._expr_in_functionCall2293);
+								PushFollow(Follow._expr_in_functionCall2309);
 								expr198=expr();
 								PopFollow();
 
@@ -9962,7 +9986,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 								DebugLocation(434, 79);
 
 								_last = (IASTNode)input.LT(1);
-								PushFollow(Follow._query_in_functionCall2297);
+								PushFollow(Follow._query_in_functionCall2313);
 								query199=query();
 								PopFollow();
 
@@ -9978,7 +10002,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 								DebugLocation(434, 87);
 
 								_last = (IASTNode)input.LT(1);
-								PushFollow(Follow._comparisonExpr_in_functionCall2301);
+								PushFollow(Follow._comparisonExpr_in_functionCall2317);
 								comparisonExpr200=comparisonExpr();
 								PopFollow();
 
@@ -10039,7 +10063,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(436, 6);
 
 				_last = (IASTNode)input.LT(1);
-				AGGREGATE201=(IASTNode)Match(input,AGGREGATE,Follow._AGGREGATE_in_functionCall2320); 
+				AGGREGATE201=(IASTNode)Match(input,AGGREGATE,Follow._AGGREGATE_in_functionCall2336); 
 				AGGREGATE201_tree = (IASTNode)adaptor.DupNode(AGGREGATE201);
 
 
@@ -10050,7 +10074,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(436, 16);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._aggregateExpr_in_functionCall2322);
+				PushFollow(Follow._aggregateExpr_in_functionCall2338);
 				aggregateExpr202=aggregateExpr();
 				PopFollow();
 
@@ -10175,7 +10199,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(440, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._literal_in_constant2335);
+				PushFollow(Follow._literal_in_constant2351);
 				literal203=literal();
 				PopFollow();
 
@@ -10193,7 +10217,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(441, 4);
 
 				_last = (IASTNode)input.LT(1);
-				NULL204=(IASTNode)Match(input,NULL,Follow._NULL_in_constant2340); 
+				NULL204=(IASTNode)Match(input,NULL,Follow._NULL_in_constant2356); 
 				NULL204_tree = (IASTNode)adaptor.DupNode(NULL204);
 
 
@@ -10211,7 +10235,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(442, 5);
 
 				_last = (IASTNode)input.LT(1);
-				t=(IASTNode)Match(input,TRUE,Follow._TRUE_in_constant2347); 
+				t=(IASTNode)Match(input,TRUE,Follow._TRUE_in_constant2363); 
 				t_tree = (IASTNode)adaptor.DupNode(t);
 
 
@@ -10231,7 +10255,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(443, 5);
 
 				_last = (IASTNode)input.LT(1);
-				f=(IASTNode)Match(input,FALSE,Follow._FALSE_in_constant2357); 
+				f=(IASTNode)Match(input,FALSE,Follow._FALSE_in_constant2373); 
 				f_tree = (IASTNode)adaptor.DupNode(f);
 
 
@@ -10251,7 +10275,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(444, 4);
 
 				_last = (IASTNode)input.LT(1);
-				JAVA_CONSTANT205=(IASTNode)Match(input,JAVA_CONSTANT,Follow._JAVA_CONSTANT_in_constant2364); 
+				JAVA_CONSTANT205=(IASTNode)Match(input,JAVA_CONSTANT,Follow._JAVA_CONSTANT_in_constant2380); 
 				JAVA_CONSTANT205_tree = (IASTNode)adaptor.DupNode(JAVA_CONSTANT205);
 
 
@@ -10339,7 +10363,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(448, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._numericLiteral_in_literal2375);
+				PushFollow(Follow._numericLiteral_in_literal2391);
 				numericLiteral206=numericLiteral();
 				PopFollow();
 
@@ -10357,7 +10381,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(449, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._stringLiteral_in_literal2380);
+				PushFollow(Follow._stringLiteral_in_literal2396);
 				stringLiteral207=stringLiteral();
 				PopFollow();
 
@@ -10505,7 +10529,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(465, 4);
 
 			_last = (IASTNode)input.LT(1);
-			QUOTED_String209=(IASTNode)Match(input,QUOTED_String,Follow._QUOTED_String_in_stringLiteral2427); 
+			QUOTED_String209=(IASTNode)Match(input,QUOTED_String,Follow._QUOTED_String_in_stringLiteral2443); 
 			QUOTED_String209_tree = (IASTNode)adaptor.DupNode(QUOTED_String209);
 
 
@@ -10681,7 +10705,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(473, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._addrExprDot_in_addrExpr2457);
+				PushFollow(Follow._addrExprDot_in_addrExpr2473);
 				addrExprDot211=addrExprDot(root);
 				PopFollow();
 
@@ -10699,7 +10723,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(474, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._addrExprIndex_in_addrExpr2464);
+				PushFollow(Follow._addrExprIndex_in_addrExpr2480);
 				addrExprIndex212=addrExprIndex(root);
 				PopFollow();
 
@@ -10717,7 +10741,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(475, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._addrExprIdent_in_addrExpr2471);
+				PushFollow(Follow._addrExprIdent_in_addrExpr2487);
 				addrExprIdent213=addrExprIdent(root);
 				PopFollow();
 
@@ -10793,7 +10817,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(483, 7);
 
 			_last = (IASTNode)input.LT(1);
-			d=(IASTNode)Match(input,DOT,Follow._DOT_in_addrExprDot2495); 
+			d=(IASTNode)Match(input,DOT,Follow._DOT_in_addrExprDot2511); 
 			 
 			stream_DOT.Add(d);
 
@@ -10801,14 +10825,14 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			Match(input, TokenTypes.Down, null); 
 			DebugLocation(483, 15);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._addrExprLhs_in_addrExprDot2499);
+			PushFollow(Follow._addrExprLhs_in_addrExprDot2515);
 			lhs=addrExprLhs();
 			PopFollow();
 
 			stream_addrExprLhs.Add(lhs.Tree);
 			DebugLocation(483, 31);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._propertyName_in_addrExprDot2503);
+			PushFollow(Follow._propertyName_in_addrExprDot2519);
 			rhs=propertyName();
 			PopFollow();
 
@@ -10928,7 +10952,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(493, 7);
 
 			_last = (IASTNode)input.LT(1);
-			i=(IASTNode)Match(input,INDEX_OP,Follow._INDEX_OP_in_addrExprIndex2542); 
+			i=(IASTNode)Match(input,INDEX_OP,Follow._INDEX_OP_in_addrExprIndex2558); 
 			 
 			stream_INDEX_OP.Add(i);
 
@@ -10936,14 +10960,14 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			Match(input, TokenTypes.Down, null); 
 			DebugLocation(493, 21);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._addrExprLhs_in_addrExprIndex2546);
+			PushFollow(Follow._addrExprLhs_in_addrExprIndex2562);
 			lhs2=addrExprLhs();
 			PopFollow();
 
 			stream_addrExprLhs.Add(lhs2.Tree);
 			DebugLocation(493, 38);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._expr_in_addrExprIndex2550);
+			PushFollow(Follow._expr_in_addrExprIndex2566);
 			rhs2=expr();
 			PopFollow();
 
@@ -11050,7 +11074,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			{
 			DebugLocation(498, 5);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._identifier_in_addrExprIdent2582);
+			PushFollow(Follow._identifier_in_addrExprIdent2598);
 			p=identifier();
 			PopFollow();
 
@@ -11156,7 +11180,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(504, 4);
 
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._addrExpr_in_addrExprLhs2610);
+			PushFollow(Follow._addrExpr_in_addrExprLhs2626);
 			addrExpr214=addrExpr(false);
 			PopFollow();
 
@@ -11262,7 +11286,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(508, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._identifier_in_propertyName2623);
+				PushFollow(Follow._identifier_in_propertyName2639);
 				identifier215=identifier();
 				PopFollow();
 
@@ -11280,7 +11304,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(509, 4);
 
 				_last = (IASTNode)input.LT(1);
-				CLASS216=(IASTNode)Match(input,CLASS,Follow._CLASS_in_propertyName2628); 
+				CLASS216=(IASTNode)Match(input,CLASS,Follow._CLASS_in_propertyName2644); 
 				CLASS216_tree = (IASTNode)adaptor.DupNode(CLASS216);
 
 
@@ -11298,7 +11322,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(510, 4);
 
 				_last = (IASTNode)input.LT(1);
-				ELEMENTS217=(IASTNode)Match(input,ELEMENTS,Follow._ELEMENTS_in_propertyName2633); 
+				ELEMENTS217=(IASTNode)Match(input,ELEMENTS,Follow._ELEMENTS_in_propertyName2649); 
 				ELEMENTS217_tree = (IASTNode)adaptor.DupNode(ELEMENTS217);
 
 
@@ -11316,7 +11340,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(511, 4);
 
 				_last = (IASTNode)input.LT(1);
-				INDICES218=(IASTNode)Match(input,INDICES,Follow._INDICES_in_propertyName2638); 
+				INDICES218=(IASTNode)Match(input,INDICES,Follow._INDICES_in_propertyName2654); 
 				INDICES218_tree = (IASTNode)adaptor.DupNode(INDICES218);
 
 
@@ -11404,7 +11428,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(515, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._propertyRefPath_in_propertyRef2650);
+				PushFollow(Follow._propertyRefPath_in_propertyRef2666);
 				propertyRefPath219=propertyRefPath();
 				PopFollow();
 
@@ -11422,7 +11446,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(516, 4);
 
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._propertyRefIdent_in_propertyRef2655);
+				PushFollow(Follow._propertyRefIdent_in_propertyRef2671);
 				propertyRefIdent220=propertyRefIdent();
 				PopFollow();
 
@@ -11498,7 +11522,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(524, 7);
 
 			_last = (IASTNode)input.LT(1);
-			d=(IASTNode)Match(input,DOT,Follow._DOT_in_propertyRefPath2675); 
+			d=(IASTNode)Match(input,DOT,Follow._DOT_in_propertyRefPath2691); 
 			 
 			stream_DOT.Add(d);
 
@@ -11506,14 +11530,14 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			Match(input, TokenTypes.Down, null); 
 			DebugLocation(524, 15);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._propertyRefLhs_in_propertyRefPath2679);
+			PushFollow(Follow._propertyRefLhs_in_propertyRefPath2695);
 			lhs=propertyRefLhs();
 			PopFollow();
 
 			stream_propertyRefLhs.Add(lhs.Tree);
 			DebugLocation(524, 34);
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._propertyName_in_propertyRefPath2683);
+			PushFollow(Follow._propertyName_in_propertyRefPath2699);
 			rhs=propertyName();
 			PopFollow();
 
@@ -11623,7 +11647,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(542, 5);
 
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._identifier_in_propertyRefIdent2720);
+			PushFollow(Follow._identifier_in_propertyRefIdent2736);
 			p=identifier();
 			PopFollow();
 
@@ -11699,7 +11723,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(546, 4);
 
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._propertyRef_in_propertyRefLhs2732);
+			PushFollow(Follow._propertyRef_in_propertyRefLhs2748);
 			propertyRef221=propertyRef();
 			PopFollow();
 
@@ -11762,7 +11786,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(554, 5);
 
 			_last = (IASTNode)input.LT(1);
-			PushFollow(Follow._identifier_in_aliasRef2753);
+			PushFollow(Follow._identifier_in_aliasRef2769);
 			i=identifier();
 			PopFollow();
 
@@ -11865,7 +11889,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(559, 7);
 
 				_last = (IASTNode)input.LT(1);
-				c=(IASTNode)Match(input,COLON,Follow._COLON_in_parameter2771); 
+				c=(IASTNode)Match(input,COLON,Follow._COLON_in_parameter2787); 
 				 
 				stream_COLON.Add(c);
 
@@ -11873,7 +11897,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				Match(input, TokenTypes.Down, null); 
 				DebugLocation(559, 15);
 				_last = (IASTNode)input.LT(1);
-				PushFollow(Follow._identifier_in_parameter2775);
+				PushFollow(Follow._identifier_in_parameter2791);
 				a=identifier();
 				PopFollow();
 
@@ -11931,7 +11955,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(562, 7);
 
 				_last = (IASTNode)input.LT(1);
-				p=(IASTNode)Match(input,PARAM,Follow._PARAM_in_parameter2796); 
+				p=(IASTNode)Match(input,PARAM,Follow._PARAM_in_parameter2812); 
 				 
 				stream_PARAM.Add(p);
 
@@ -11959,7 +11983,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 						DebugLocation(562, 16);
 
 						_last = (IASTNode)input.LT(1);
-						n=(IASTNode)Match(input,NUM_INT,Follow._NUM_INT_in_parameter2801); 
+						n=(IASTNode)Match(input,NUM_INT,Follow._NUM_INT_in_parameter2817); 
 						 
 						stream_NUM_INT.Add(n);
 
@@ -12081,7 +12105,7 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 			DebugLocation(568, 4);
 
 			_last = (IASTNode)input.LT(1);
-			NUM_INT222=(IASTNode)Match(input,NUM_INT,Follow._NUM_INT_in_numericInteger2834); 
+			NUM_INT222=(IASTNode)Match(input,NUM_INT,Follow._NUM_INT_in_numericInteger2850); 
 			NUM_INT222_tree = (IASTNode)adaptor.DupNode(NUM_INT222);
 
 
@@ -12164,248 +12188,248 @@ public partial class HqlSqlWalker : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _orderExpr_in_orderExprs720 = new BitSet(new ulong[]{0x8801003508ED412UL,0x461004C01F814010UL,0x1UL});
 		public static readonly BitSet _orderExprs_in_orderExprs734 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _resultVariableRef_in_orderExpr749 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _expr_in_orderExpr754 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _identifier_in_resultVariableRef768 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _SKIP_in_skipClause782 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _NUM_INT_in_skipClause785 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _parameter_in_skipClause789 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _TAKE_in_takeClause803 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _NUM_INT_in_takeClause806 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _parameter_in_takeClause810 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _GROUP_in_groupClause824 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _expr_in_groupClause829 = new BitSet(new ulong[]{0x8801003108ED018UL,0x461004C01F814010UL,0x1UL});
-		public static readonly BitSet _HAVING_in_havingClause845 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _logicalExpr_in_havingClause847 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _SELECT_in_selectClause861 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _DISTINCT_in_selectClause868 = new BitSet(new ulong[]{0x10800007188ED250UL,0x141006C03F014000UL,0x1UL});
-		public static readonly BitSet _selectExprList_in_selectClause874 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _selectExpr_in_selectExprList909 = new BitSet(new ulong[]{0x10800007188ED252UL,0x141006C03F014000UL,0x1UL});
-		public static readonly BitSet _aliasedSelectExpr_in_selectExprList913 = new BitSet(new ulong[]{0x10800007188ED252UL,0x141006C03F014000UL,0x1UL});
-		public static readonly BitSet _AS_in_aliasedSelectExpr937 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _selectExpr_in_aliasedSelectExpr941 = new BitSet(new ulong[]{0x80000000000000UL,0x0UL,0x1UL});
-		public static readonly BitSet _identifier_in_aliasedSelectExpr945 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _propertyRef_in_selectExpr960 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ALL_in_selectExpr972 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _aliasRef_in_selectExpr976 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _OBJECT_in_selectExpr988 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_orderExpr755 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _identifier_in_resultVariableRef775 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _SKIP_in_skipClause798 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _NUM_INT_in_skipClause801 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _parameter_in_skipClause805 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _TAKE_in_takeClause819 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _NUM_INT_in_takeClause822 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _parameter_in_takeClause826 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _GROUP_in_groupClause840 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_groupClause845 = new BitSet(new ulong[]{0x8801003108ED018UL,0x461004C01F814010UL,0x1UL});
+		public static readonly BitSet _HAVING_in_havingClause861 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _logicalExpr_in_havingClause863 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _SELECT_in_selectClause877 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _DISTINCT_in_selectClause884 = new BitSet(new ulong[]{0x10800007188ED250UL,0x141006C03F014000UL,0x1UL});
+		public static readonly BitSet _selectExprList_in_selectClause890 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _selectExpr_in_selectExprList925 = new BitSet(new ulong[]{0x10800007188ED252UL,0x141006C03F014000UL,0x1UL});
+		public static readonly BitSet _aliasedSelectExpr_in_selectExprList929 = new BitSet(new ulong[]{0x10800007188ED252UL,0x141006C03F014000UL,0x1UL});
+		public static readonly BitSet _AS_in_aliasedSelectExpr953 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _selectExpr_in_aliasedSelectExpr957 = new BitSet(new ulong[]{0x80000000000000UL,0x0UL,0x1UL});
+		public static readonly BitSet _identifier_in_aliasedSelectExpr961 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _propertyRef_in_selectExpr976 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ALL_in_selectExpr988 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _aliasRef_in_selectExpr992 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _constructor_in_selectExpr1003 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _functionCall_in_selectExpr1014 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _parameter_in_selectExpr1019 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _count_in_selectExpr1024 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionFunction_in_selectExpr1029 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _literal_in_selectExpr1037 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _arithmeticExpr_in_selectExpr1042 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _query_in_selectExpr1047 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _COUNT_in_count1059 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _aggregateExpr_in_count1074 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _ROW_STAR_in_count1078 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _CONSTRUCTOR_in_constructor1094 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _path_in_constructor1096 = new BitSet(new ulong[]{0x10800007188ED258UL,0x141006C03F014000UL,0x1UL});
-		public static readonly BitSet _selectExpr_in_constructor1100 = new BitSet(new ulong[]{0x10800007188ED258UL,0x141006C03F014000UL,0x1UL});
-		public static readonly BitSet _aliasedSelectExpr_in_constructor1104 = new BitSet(new ulong[]{0x10800007188ED258UL,0x141006C03F014000UL,0x1UL});
-		public static readonly BitSet _expr_in_aggregateExpr1120 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionFunction_in_aggregateExpr1126 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _FROM_in_fromClause1146 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _fromElementList_in_fromClause1150 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _fromElement_in_fromElementList1168 = new BitSet(new ulong[]{0x400000000002UL,0x80000000020UL});
-		public static readonly BitSet _RANGE_in_fromElement1193 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _path_in_fromElement1197 = new BitSet(new ulong[]{0x200000000028UL});
-		public static readonly BitSet _ALIAS_in_fromElement1202 = new BitSet(new ulong[]{0x200000000008UL});
-		public static readonly BitSet _FETCH_in_fromElement1209 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _joinElement_in_fromElement1236 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _FILTER_ENTITY_in_fromElement1251 = new BitSet(new ulong[]{0x20UL});
-		public static readonly BitSet _ALIAS_in_fromElement1255 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _JOIN_in_joinElement1284 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _joinType_in_joinElement1289 = new BitSet(new ulong[]{0x80200200000000UL,0x0UL,0x1UL});
-		public static readonly BitSet _FETCH_in_joinElement1299 = new BitSet(new ulong[]{0x80000200000000UL,0x0UL,0x1UL});
-		public static readonly BitSet _propertyRef_in_joinElement1305 = new BitSet(new ulong[]{0x200000000028UL,0x0UL,0x8UL});
-		public static readonly BitSet _ALIAS_in_joinElement1310 = new BitSet(new ulong[]{0x200000000008UL,0x0UL,0x8UL});
-		public static readonly BitSet _FETCH_in_joinElement1317 = new BitSet(new ulong[]{0x8UL,0x0UL,0x8UL});
-		public static readonly BitSet _WITH_in_joinElement1326 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _LEFT_in_joinType1367 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
-		public static readonly BitSet _RIGHT_in_joinType1373 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
-		public static readonly BitSet _OUTER_in_joinType1379 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _FULL_in_joinType1393 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _INNER_in_joinType1400 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _identifier_in_path1422 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _DOT_in_path1430 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _path_in_path1434 = new BitSet(new ulong[]{0x80000000000000UL,0x0UL,0x1UL});
-		public static readonly BitSet _identifier_in_path1438 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _path_in_pathAsIdent1457 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _WITH_in_withClause1498 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _logicalExpr_in_withClause1504 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _WHERE_in_whereClause1532 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _logicalExpr_in_whereClause1538 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _AND_in_logicalExpr1564 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _logicalExpr_in_logicalExpr1566 = new BitSet(new ulong[]{0xC94024200002090UL,0x4007A4A4CUL,0x1UL});
-		public static readonly BitSet _logicalExpr_in_logicalExpr1568 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _OR_in_logicalExpr1575 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _logicalExpr_in_logicalExpr1577 = new BitSet(new ulong[]{0xC94024200002090UL,0x4007A4A4CUL,0x1UL});
-		public static readonly BitSet _logicalExpr_in_logicalExpr1579 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _NOT_in_logicalExpr1586 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _logicalExpr_in_logicalExpr1588 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _comparisonExpr_in_logicalExpr1594 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _functionCall_in_logicalExpr1599 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _logicalPath_in_logicalExpr1604 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _addrExpr_in_logicalPath1623 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _EQ_in_comparisonExpr1661 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1663 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1665 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _NE_in_comparisonExpr1672 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1674 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1676 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _LT_in_comparisonExpr1683 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1685 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1687 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _GT_in_comparisonExpr1694 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1696 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1698 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _LE_in_comparisonExpr1705 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1707 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1709 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _GE_in_comparisonExpr1716 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1718 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1720 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _LIKE_in_comparisonExpr1727 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1729 = new BitSet(new ulong[]{0x8801003108ED010UL,0x461004C01F814010UL,0x1UL});
-		public static readonly BitSet _expr_in_comparisonExpr1731 = new BitSet(new ulong[]{0x8000000008UL});
-		public static readonly BitSet _ESCAPE_in_comparisonExpr1736 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _expr_in_comparisonExpr1738 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _NOT_LIKE_in_comparisonExpr1750 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1752 = new BitSet(new ulong[]{0x8801003108ED010UL,0x461004C01F814010UL,0x1UL});
-		public static readonly BitSet _expr_in_comparisonExpr1754 = new BitSet(new ulong[]{0x8000000008UL});
-		public static readonly BitSet _ESCAPE_in_comparisonExpr1759 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _expr_in_comparisonExpr1761 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _BETWEEN_in_comparisonExpr1773 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1775 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1777 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1779 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _NOT_BETWEEN_in_comparisonExpr1786 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1788 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1790 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1792 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _IN_in_comparisonExpr1799 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1801 = new BitSet(new ulong[]{0x0UL,0x1UL});
-		public static readonly BitSet _inRhs_in_comparisonExpr1803 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _NOT_IN_in_comparisonExpr1811 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1813 = new BitSet(new ulong[]{0x0UL,0x1UL});
-		public static readonly BitSet _inRhs_in_comparisonExpr1815 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _IS_NULL_in_comparisonExpr1823 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1825 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _IS_NOT_NULL_in_comparisonExpr1832 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1834 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _EXISTS_in_comparisonExpr1843 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _expr_in_comparisonExpr1847 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _collectionFunctionOrSubselect_in_comparisonExpr1851 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _IN_LIST_in_inRhs1875 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _collectionFunctionOrSubselect_in_inRhs1879 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _expr_in_inRhs1883 = new BitSet(new ulong[]{0x8801003108ED018UL,0x461004C01F814010UL,0x1UL});
-		public static readonly BitSet _expr_in_exprOrSubquery1899 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _query_in_exprOrSubquery1904 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ANY_in_exprOrSubquery1910 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _collectionFunctionOrSubselect_in_exprOrSubquery1912 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _ALL_in_exprOrSubquery1919 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _collectionFunctionOrSubselect_in_exprOrSubquery1921 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _SOME_in_exprOrSubquery1928 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _collectionFunctionOrSubselect_in_exprOrSubquery1930 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _collectionFunction_in_collectionFunctionOrSubselect1943 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _query_in_collectionFunctionOrSubselect1948 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _addrExpr_in_expr1962 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _VECTOR_EXPR_in_expr1974 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _expr_in_expr1977 = new BitSet(new ulong[]{0x8801003108ED018UL,0x461004C01F814010UL,0x1UL});
-		public static readonly BitSet _constant_in_expr1986 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _arithmeticExpr_in_expr1991 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _functionCall_in_expr1996 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _parameter_in_expr2008 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _count_in_expr2013 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _PLUS_in_arithmeticExpr2041 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2043 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2045 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _MINUS_in_arithmeticExpr2052 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2054 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2056 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _DIV_in_arithmeticExpr2063 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2065 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2067 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _STAR_in_arithmeticExpr2074 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2076 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2078 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _BNOT_in_arithmeticExpr2085 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2087 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _BAND_in_arithmeticExpr2094 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2096 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2098 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _BOR_in_arithmeticExpr2105 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2107 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2109 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _BXOR_in_arithmeticExpr2116 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2118 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2120 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _UNARY_MINUS_in_arithmeticExpr2128 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2130 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _caseExpr_in_arithmeticExpr2138 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _CASE_in_caseExpr2150 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _WHEN_in_caseExpr2156 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _logicalExpr_in_caseExpr2158 = new BitSet(new ulong[]{0x8801003108ED010UL,0x461004C01F814010UL,0x1UL});
-		public static readonly BitSet _expr_in_caseExpr2160 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _ELSE_in_caseExpr2167 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _expr_in_caseExpr2169 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _CASE2_in_caseExpr2181 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _expr_in_caseExpr2185 = new BitSet(new ulong[]{0x0UL,0x0UL,0x2UL});
-		public static readonly BitSet _WHEN_in_caseExpr2189 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _expr_in_caseExpr2191 = new BitSet(new ulong[]{0x8801003108ED010UL,0x461004C01F814010UL,0x1UL});
-		public static readonly BitSet _expr_in_caseExpr2193 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _ELSE_in_caseExpr2200 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _expr_in_caseExpr2202 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _ELEMENTS_in_collectionFunction2224 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _propertyRef_in_collectionFunction2230 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _INDICES_in_collectionFunction2249 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _propertyRef_in_collectionFunction2255 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _METHOD_CALL_in_functionCall2280 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _pathAsIdent_in_functionCall2285 = new BitSet(new ulong[]{0x80000000008UL});
-		public static readonly BitSet _EXPR_LIST_in_functionCall2290 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _expr_in_functionCall2293 = new BitSet(new ulong[]{0xC941243108EF018UL,0x561006C01FF34A5CUL,0x1UL});
-		public static readonly BitSet _query_in_functionCall2297 = new BitSet(new ulong[]{0xC941243108EF018UL,0x561006C01FF34A5CUL,0x1UL});
-		public static readonly BitSet _comparisonExpr_in_functionCall2301 = new BitSet(new ulong[]{0xC941243108EF018UL,0x561006C01FF34A5CUL,0x1UL});
-		public static readonly BitSet _AGGREGATE_in_functionCall2320 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _aggregateExpr_in_functionCall2322 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _literal_in_constant2335 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _NULL_in_constant2340 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _TRUE_in_constant2347 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _FALSE_in_constant2357 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _JAVA_CONSTANT_in_constant2364 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _numericLiteral_in_literal2375 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _stringLiteral_in_literal2380 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _QUOTED_String_in_stringLiteral2427 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _addrExprDot_in_addrExpr2457 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _addrExprIndex_in_addrExpr2464 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _addrExprIdent_in_addrExpr2471 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _DOT_in_addrExprDot2495 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _addrExprLhs_in_addrExprDot2499 = new BitSet(new ulong[]{0x1080000400100000UL,0x0UL,0x1UL});
-		public static readonly BitSet _propertyName_in_addrExprDot2503 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _INDEX_OP_in_addrExprIndex2542 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _addrExprLhs_in_addrExprIndex2546 = new BitSet(new ulong[]{0x8801003108ED010UL,0x461004C01F814010UL,0x1UL});
-		public static readonly BitSet _expr_in_addrExprIndex2550 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _identifier_in_addrExprIdent2582 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _addrExpr_in_addrExprLhs2610 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _identifier_in_propertyName2623 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _CLASS_in_propertyName2628 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ELEMENTS_in_propertyName2633 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _INDICES_in_propertyName2638 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _propertyRefPath_in_propertyRef2650 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _propertyRefIdent_in_propertyRef2655 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _DOT_in_propertyRefPath2675 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _propertyRefLhs_in_propertyRefPath2679 = new BitSet(new ulong[]{0x1080000400100000UL,0x0UL,0x1UL});
-		public static readonly BitSet _propertyName_in_propertyRefPath2683 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _identifier_in_propertyRefIdent2720 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _propertyRef_in_propertyRefLhs2732 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _identifier_in_aliasRef2753 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _COLON_in_parameter2771 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _identifier_in_parameter2775 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _PARAM_in_parameter2796 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _NUM_INT_in_parameter2801 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _NUM_INT_in_numericInteger2834 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _OBJECT_in_selectExpr1004 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _aliasRef_in_selectExpr1008 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _constructor_in_selectExpr1019 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _functionCall_in_selectExpr1030 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _parameter_in_selectExpr1035 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _count_in_selectExpr1040 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionFunction_in_selectExpr1045 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _literal_in_selectExpr1053 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _arithmeticExpr_in_selectExpr1058 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _query_in_selectExpr1063 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _COUNT_in_count1075 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _aggregateExpr_in_count1090 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _ROW_STAR_in_count1094 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _CONSTRUCTOR_in_constructor1110 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _path_in_constructor1112 = new BitSet(new ulong[]{0x10800007188ED258UL,0x141006C03F014000UL,0x1UL});
+		public static readonly BitSet _selectExpr_in_constructor1116 = new BitSet(new ulong[]{0x10800007188ED258UL,0x141006C03F014000UL,0x1UL});
+		public static readonly BitSet _aliasedSelectExpr_in_constructor1120 = new BitSet(new ulong[]{0x10800007188ED258UL,0x141006C03F014000UL,0x1UL});
+		public static readonly BitSet _expr_in_aggregateExpr1136 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionFunction_in_aggregateExpr1142 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _FROM_in_fromClause1162 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _fromElementList_in_fromClause1166 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _fromElement_in_fromElementList1184 = new BitSet(new ulong[]{0x400000000002UL,0x80000000020UL});
+		public static readonly BitSet _RANGE_in_fromElement1209 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _path_in_fromElement1213 = new BitSet(new ulong[]{0x200000000028UL});
+		public static readonly BitSet _ALIAS_in_fromElement1218 = new BitSet(new ulong[]{0x200000000008UL});
+		public static readonly BitSet _FETCH_in_fromElement1225 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _joinElement_in_fromElement1252 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _FILTER_ENTITY_in_fromElement1267 = new BitSet(new ulong[]{0x20UL});
+		public static readonly BitSet _ALIAS_in_fromElement1271 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _JOIN_in_joinElement1300 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _joinType_in_joinElement1305 = new BitSet(new ulong[]{0x80200200000000UL,0x0UL,0x1UL});
+		public static readonly BitSet _FETCH_in_joinElement1315 = new BitSet(new ulong[]{0x80000200000000UL,0x0UL,0x1UL});
+		public static readonly BitSet _propertyRef_in_joinElement1321 = new BitSet(new ulong[]{0x200000000028UL,0x0UL,0x8UL});
+		public static readonly BitSet _ALIAS_in_joinElement1326 = new BitSet(new ulong[]{0x200000000008UL,0x0UL,0x8UL});
+		public static readonly BitSet _FETCH_in_joinElement1333 = new BitSet(new ulong[]{0x8UL,0x0UL,0x8UL});
+		public static readonly BitSet _WITH_in_joinElement1342 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _LEFT_in_joinType1383 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
+		public static readonly BitSet _RIGHT_in_joinType1389 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
+		public static readonly BitSet _OUTER_in_joinType1395 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _FULL_in_joinType1409 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _INNER_in_joinType1416 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _identifier_in_path1438 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _DOT_in_path1446 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _path_in_path1450 = new BitSet(new ulong[]{0x80000000000000UL,0x0UL,0x1UL});
+		public static readonly BitSet _identifier_in_path1454 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _path_in_pathAsIdent1473 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _WITH_in_withClause1514 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _logicalExpr_in_withClause1520 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _WHERE_in_whereClause1548 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _logicalExpr_in_whereClause1554 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _AND_in_logicalExpr1580 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _logicalExpr_in_logicalExpr1582 = new BitSet(new ulong[]{0xC94024200002090UL,0x4007A4A4CUL,0x1UL});
+		public static readonly BitSet _logicalExpr_in_logicalExpr1584 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _OR_in_logicalExpr1591 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _logicalExpr_in_logicalExpr1593 = new BitSet(new ulong[]{0xC94024200002090UL,0x4007A4A4CUL,0x1UL});
+		public static readonly BitSet _logicalExpr_in_logicalExpr1595 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _NOT_in_logicalExpr1602 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _logicalExpr_in_logicalExpr1604 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _comparisonExpr_in_logicalExpr1610 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _functionCall_in_logicalExpr1615 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _logicalPath_in_logicalExpr1620 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _addrExpr_in_logicalPath1639 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _EQ_in_comparisonExpr1677 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1679 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1681 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _NE_in_comparisonExpr1688 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1690 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1692 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _LT_in_comparisonExpr1699 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1701 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1703 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _GT_in_comparisonExpr1710 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1712 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1714 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _LE_in_comparisonExpr1721 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1723 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1725 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _GE_in_comparisonExpr1732 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1734 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1736 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _LIKE_in_comparisonExpr1743 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1745 = new BitSet(new ulong[]{0x8801003108ED010UL,0x461004C01F814010UL,0x1UL});
+		public static readonly BitSet _expr_in_comparisonExpr1747 = new BitSet(new ulong[]{0x8000000008UL});
+		public static readonly BitSet _ESCAPE_in_comparisonExpr1752 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_comparisonExpr1754 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _NOT_LIKE_in_comparisonExpr1766 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1768 = new BitSet(new ulong[]{0x8801003108ED010UL,0x461004C01F814010UL,0x1UL});
+		public static readonly BitSet _expr_in_comparisonExpr1770 = new BitSet(new ulong[]{0x8000000008UL});
+		public static readonly BitSet _ESCAPE_in_comparisonExpr1775 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_comparisonExpr1777 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _BETWEEN_in_comparisonExpr1789 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1791 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1793 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1795 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _NOT_BETWEEN_in_comparisonExpr1802 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1804 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1806 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1808 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _IN_in_comparisonExpr1815 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1817 = new BitSet(new ulong[]{0x0UL,0x1UL});
+		public static readonly BitSet _inRhs_in_comparisonExpr1819 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _NOT_IN_in_comparisonExpr1827 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1829 = new BitSet(new ulong[]{0x0UL,0x1UL});
+		public static readonly BitSet _inRhs_in_comparisonExpr1831 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _IS_NULL_in_comparisonExpr1839 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1841 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _IS_NOT_NULL_in_comparisonExpr1848 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_comparisonExpr1850 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _EXISTS_in_comparisonExpr1859 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_comparisonExpr1863 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _collectionFunctionOrSubselect_in_comparisonExpr1867 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _IN_LIST_in_inRhs1891 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _collectionFunctionOrSubselect_in_inRhs1895 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _expr_in_inRhs1899 = new BitSet(new ulong[]{0x8801003108ED018UL,0x461004C01F814010UL,0x1UL});
+		public static readonly BitSet _expr_in_exprOrSubquery1915 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _query_in_exprOrSubquery1920 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ANY_in_exprOrSubquery1926 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _collectionFunctionOrSubselect_in_exprOrSubquery1928 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _ALL_in_exprOrSubquery1935 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _collectionFunctionOrSubselect_in_exprOrSubquery1937 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _SOME_in_exprOrSubquery1944 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _collectionFunctionOrSubselect_in_exprOrSubquery1946 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _collectionFunction_in_collectionFunctionOrSubselect1959 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _query_in_collectionFunctionOrSubselect1964 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _addrExpr_in_expr1978 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _VECTOR_EXPR_in_expr1990 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_expr1993 = new BitSet(new ulong[]{0x8801003108ED018UL,0x461004C01F814010UL,0x1UL});
+		public static readonly BitSet _constant_in_expr2002 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _arithmeticExpr_in_expr2007 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _functionCall_in_expr2012 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _parameter_in_expr2024 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _count_in_expr2029 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _PLUS_in_arithmeticExpr2057 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2059 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2061 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _MINUS_in_arithmeticExpr2068 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2070 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2072 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _DIV_in_arithmeticExpr2079 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2081 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2083 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _STAR_in_arithmeticExpr2090 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2092 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2094 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _BNOT_in_arithmeticExpr2101 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2103 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _BAND_in_arithmeticExpr2110 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2112 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2114 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _BOR_in_arithmeticExpr2121 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2123 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2125 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _BXOR_in_arithmeticExpr2132 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2134 = new BitSet(new ulong[]{0x8801003108ED150UL,0x561406C01F814010UL,0x1UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2136 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _UNARY_MINUS_in_arithmeticExpr2144 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _exprOrSubquery_in_arithmeticExpr2146 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _caseExpr_in_arithmeticExpr2154 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _CASE_in_caseExpr2166 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _WHEN_in_caseExpr2172 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _logicalExpr_in_caseExpr2174 = new BitSet(new ulong[]{0x8801003108ED010UL,0x461004C01F814010UL,0x1UL});
+		public static readonly BitSet _expr_in_caseExpr2176 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _ELSE_in_caseExpr2183 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_caseExpr2185 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _CASE2_in_caseExpr2197 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_caseExpr2201 = new BitSet(new ulong[]{0x0UL,0x0UL,0x2UL});
+		public static readonly BitSet _WHEN_in_caseExpr2205 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_caseExpr2207 = new BitSet(new ulong[]{0x8801003108ED010UL,0x461004C01F814010UL,0x1UL});
+		public static readonly BitSet _expr_in_caseExpr2209 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _ELSE_in_caseExpr2216 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_caseExpr2218 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _ELEMENTS_in_collectionFunction2240 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _propertyRef_in_collectionFunction2246 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _INDICES_in_collectionFunction2265 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _propertyRef_in_collectionFunction2271 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _METHOD_CALL_in_functionCall2296 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _pathAsIdent_in_functionCall2301 = new BitSet(new ulong[]{0x80000000008UL});
+		public static readonly BitSet _EXPR_LIST_in_functionCall2306 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _expr_in_functionCall2309 = new BitSet(new ulong[]{0xC941243108EF018UL,0x561006C01FF34A5CUL,0x1UL});
+		public static readonly BitSet _query_in_functionCall2313 = new BitSet(new ulong[]{0xC941243108EF018UL,0x561006C01FF34A5CUL,0x1UL});
+		public static readonly BitSet _comparisonExpr_in_functionCall2317 = new BitSet(new ulong[]{0xC941243108EF018UL,0x561006C01FF34A5CUL,0x1UL});
+		public static readonly BitSet _AGGREGATE_in_functionCall2336 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _aggregateExpr_in_functionCall2338 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _literal_in_constant2351 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _NULL_in_constant2356 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _TRUE_in_constant2363 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _FALSE_in_constant2373 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _JAVA_CONSTANT_in_constant2380 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _numericLiteral_in_literal2391 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _stringLiteral_in_literal2396 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _QUOTED_String_in_stringLiteral2443 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _addrExprDot_in_addrExpr2473 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _addrExprIndex_in_addrExpr2480 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _addrExprIdent_in_addrExpr2487 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _DOT_in_addrExprDot2511 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _addrExprLhs_in_addrExprDot2515 = new BitSet(new ulong[]{0x1080000400100000UL,0x0UL,0x1UL});
+		public static readonly BitSet _propertyName_in_addrExprDot2519 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _INDEX_OP_in_addrExprIndex2558 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _addrExprLhs_in_addrExprIndex2562 = new BitSet(new ulong[]{0x8801003108ED010UL,0x461004C01F814010UL,0x1UL});
+		public static readonly BitSet _expr_in_addrExprIndex2566 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _identifier_in_addrExprIdent2598 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _addrExpr_in_addrExprLhs2626 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _identifier_in_propertyName2639 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _CLASS_in_propertyName2644 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ELEMENTS_in_propertyName2649 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _INDICES_in_propertyName2654 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _propertyRefPath_in_propertyRef2666 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _propertyRefIdent_in_propertyRef2671 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _DOT_in_propertyRefPath2691 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _propertyRefLhs_in_propertyRefPath2695 = new BitSet(new ulong[]{0x1080000400100000UL,0x0UL,0x1UL});
+		public static readonly BitSet _propertyName_in_propertyRefPath2699 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _identifier_in_propertyRefIdent2736 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _propertyRef_in_propertyRefLhs2748 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _identifier_in_aliasRef2769 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _COLON_in_parameter2787 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _identifier_in_parameter2791 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _PARAM_in_parameter2812 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _NUM_INT_in_parameter2817 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _NUM_INT_in_numericInteger2850 = new BitSet(new ulong[]{0x2UL});
 	}
 	#endregion Follow sets
 }
